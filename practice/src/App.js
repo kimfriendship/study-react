@@ -1,12 +1,21 @@
 import React from "react";
 import Hello from "./Hello.js";
+import "./App.css";
 
 function App() {
+  const name = "React";
+  const style = {
+    backgroundColor: "black",
+    color: "aqua",
+    fontSize: 24,
+    padding: "1rem",
+  };
+
   return (
     <div>
       <Hello />
-      <Hello />
-      <Hello />
+      <div style={style}>{name}</div>
+      <div className="gray-box"></div>
     </div>
   );
 }
