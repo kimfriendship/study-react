@@ -1,3 +1,7 @@
+body {
+  margin: 300px;
+}
+
 .gray-box {
   background: gray;
   width: 64px;
