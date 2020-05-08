@@ -2,34 +2,29 @@
   text-align: center;
 }
 
-form {
+.loginForm {
   width: 200px;
   height: 300px;
   margin: 100px;
   border: 3px solid lightcoral;
 }
 
-h1 {
+.loginTitle {
   text-align: center;
 }
 
-div {
+.loginWrapper {
   width: 200px;
   height: 300px;
 }
 
-span {
-  display: block;
-  margin: 20px;
-}
-
-input {
+.loginInputs {
   display: block;
   margin: 20px;
   width: 150px;
 }
 
-button {
+.loginButton {
   width: 156px;
   height: 30px;
   margin: 20px;
