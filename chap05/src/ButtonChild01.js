@@ -5,16 +5,14 @@ class ButtonChild01 extends Component {
     title: this.props.title,
     color: this.props.color,
   };
-  handleButtonClick = () => {
-    console.log("Button Child01 클릭!");
+
+  handleClick = () => {
     const check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
     if (check.test(this.state.title)) {
-      console.log("한글");
       this.setState({
         title: "Purple Button",
       });
     } else {
-      console.log("영어");
       this.setState({
         title: "보라색 버튼",
       });
@@ -23,14 +21,16 @@ class ButtonChild01 extends Component {
 
   render() {
     const { title, color } = this.state;
+
     const ButtonStyle = {
       border: "none",
       width: 100,
       height: 30,
       background: color,
     };
+
     return (
-      <button style={ButtonStyle} onClick={this.handleButtonClick}>
+      <button style={ButtonStyle} onClick={this.handleClick}>
         {title}
       </button>
     );
@@ -38,7 +38,7 @@ class ButtonChild01 extends Component {
 }
 
 ButtonChild01.defaultProps = {
-  title: "이름없음 버튼",
+  title: "no name",
 };
 
 export default ButtonChild01;
