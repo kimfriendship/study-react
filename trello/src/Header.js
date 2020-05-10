@@ -4,7 +4,7 @@ import style from "./App.css";
 
 const st = classNames.bind(style);
 
-const Header = ({ status, userId }) => {
+const Header = ({ status, userId, clickLogout }) => {
   const checkStatus = status ? userId : "로그인 요망";
 
   return (
@@ -12,6 +12,7 @@ const Header = ({ status, userId }) => {
       <span className={st("status")}>
         {checkStatus}
         <button
+          onClick={clickLogout}
           className={st("logoutBtn")}
           style={{ display: status ? "block" : "none" }}
         >

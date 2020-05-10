@@ -39,11 +39,27 @@ function App() {
     }
   };
 
+  const clickLogout = () => {
+    setUser({
+      ...user,
+      status: false,
+    });
+  };
+
   return (
     <>
-      <Header userId={user.userId} status={user.status} />
-      <Login inputs={inputs} inputLogin={inputLogin} clickLogin={clickLogin} />
-      <Board />
+      <Header
+        userId={user.userId}
+        status={user.status}
+        clickLogout={clickLogout}
+      />
+      <Login
+        inputs={inputs}
+        status={user.status}
+        inputLogin={inputLogin}
+        clickLogin={clickLogin}
+      />
+      <Board status={user.status} />
     </>
   );
 }

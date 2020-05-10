@@ -48,8 +48,32 @@
 }
 
 .logoutBtn {
+  float: right;
   border: none;
   background: none;
   font-size: 15px;
-  margin: 0px 5px;
+  margin: 4px 5px 4px 15px;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* New Board */
+.boardWrapper {
+  margin: 50px;
+}
+
+.boardTitle {
+  font-size: 20px;
+  display: inline;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 50px;
+}
+
+.inputTitle {
+  margin: 0px 20px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 2px solid black;
+  outline: none;
 }
