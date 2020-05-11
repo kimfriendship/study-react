@@ -21,11 +21,11 @@ function App() {
 
   const [todos, setTodos] = useState({
     wooey: [
-      { key: 1, title: "study", content: "react" },
-      { key: 2, title: "study", content: "js" },
-      { key: 3, title: "study", content: "html/css" },
-      { key: 4, title: "play", content: "netflix" },
-      { key: 5, title: "play", content: "sleep" },
+      { key: 1, parentId: 1, title: "study", content: "react" },
+      { key: 2, parentId: 1, title: "study", content: "js" },
+      { key: 3, parentId: 1, title: "study", content: "html/css" },
+      { key: 4, parentId: 2, title: "play", content: "netflix" },
+      { key: 5, parentId: 2, title: "play", content: "sleep" },
     ],
   });
 
@@ -71,10 +71,16 @@ function App() {
   const createTitle = (e) => {
     if (e.key !== "Enter" || e.target.value.trim() === "") return;
 
+    // setCategories({
+    //   [user.userId]: [
+    //     ...category[user.userId],
+    //     { key: 10, title: e.target.value },
+    //   ],
+    // });
     setCategories({
       [user.userId]: [
         ...category[user.userId],
-        { key: 10, title: e.target.value },
+        { key: category.length + 1, title: e.target.value },
       ],
     });
     setBoardInputs("");
@@ -84,24 +90,27 @@ function App() {
     setBoardInputs(e.target.value);
   };
 
-  const createTodo = (e) => {
-    if (e.key !== "Enter" || e.target.value.trim() === "") return;
+  const createTodo = (e, parentId, inputValue) => {
+    if (e.key == "Enter") {
+      console.log(e.key, parentId, inputValue);
+      setTodos({
+        [user.userId]: [
+          ...todos[user.userId],
+          {
+            key: Math.random(),
+            parentId: parentId,
+            title: e.target.parentNode.firstElementChild.textContent,
+            content: inputValue,
+          },
+        ],
+      });
 
-    setTodos({
-      [user.userId]: [
-        ...todos[user.userId],
-        {
-          key: 10,
-          title: e.target.parentNode.firstElementChild.textContent,
-          content: e.target.value,
-        },
-      ],
-    });
-
-    setTodoInputs("");
+      setTodoInputs("");
+    }
   };
 
   const changeTodo = (e) => {
+    //여기서 새로운 todo 상태를 관리하는 것 같습니다.
     setTodoInputs(e.target.value);
   };
 
@@ -123,7 +132,7 @@ function App() {
         status={user.status}
         clickLogout={clickLogout}
       />
-      {!user.status ? (
+      {user.status ? (
         <Login
           inputs={inputs}
           status={user.status}

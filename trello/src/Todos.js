@@ -5,10 +5,11 @@ const TodoLists = ({ lists }) => {
 };
 
 const Todos = ({ todos }) => {
+  console.log(todos);
   return (
     <>
       {todos.map((todo) => (
-        <TodoLists lists={todo.content} />
+        <TodoLists lists={todo.content} key={todo.key} />
       ))}
     </>
   );

@@ -21,7 +21,7 @@
   padding: 30px 15px;
 }
 
-.loginForm > * {
+.loginForm>* {
   width: 200px;
   font-size: 18px;
 }
@@ -97,6 +97,7 @@
   margin: 70px 20px;
   padding: 30px;
   width: 250px;
+  height: auto;
   background-color: rgb(224, 224, 224);
 }
 
@@ -126,6 +127,6 @@
   font-size: 16px;
 }
 
-.todo > li {
+.todo>li {
   margin-top: 10px;
 }
