@@ -1,15 +1,14 @@
 import React from "react";
 
-const TodoLists = ({ key, lists }) => {
-  return <li>{lists.map((list) => list)}</li>;
+const TodoLists = ({ lists }) => {
+  return <li>{lists}</li>;
 };
 
 const Todos = ({ todos }) => {
-  console.log(todos);
   return (
     <>
       {todos.map((todo) => (
-        <TodoLists key={todo.id} lists={todo.lists} />
+        <TodoLists lists={todo.content} />
       ))}
     </>
   );

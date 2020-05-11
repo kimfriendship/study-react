@@ -4,12 +4,9 @@ import style from "./App.css";
 
 const st = classNames.bind(style);
 
-const Login = ({ inputs, inputLogin, clickLogin, status }) => {
+const Login = ({ inputs, inputLogin, clickLogin }) => {
   return (
-    <div
-      style={{ display: status ? "none" : "block" }}
-      className={st("loginWrapper")}
-    >
+    <div className={st("loginWrapper")}>
       <h1 className={st("loginTitle")}>로그인</h1>
       <form className={st("loginForm")}>
         <span>ID: </span>

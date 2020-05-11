@@ -25,12 +25,15 @@
 
 .loginInput {
   margin: 10px 0px 25px 0px;
+  line-height: 30px;
 }
 
 .loginButton {
   margin-top: 10px;
   height: 40px;
   cursor: pointer;
+  border: none;
+  background: lightsteelblue;
 }
 
 /* Header */

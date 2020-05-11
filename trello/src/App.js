@@ -6,25 +6,31 @@ import "./App.css";
 
 function App() {
   const [user, setUser] = useState({
+    key: 1,
     userId: "wooey",
     userPw: "asdf",
     status: false,
   });
 
   const [category, setCategories] = useState({
-    wooey: ["친구들 만나기", "맛난거 먹기"],
+    wooey: [
+      { key: 1, title: "study" },
+      { key: 2, title: "play" },
+    ],
   });
 
-  const [todos, setTodos] = useState([
-    {
-      id: 0,
-      lists: ["멍충이들", "해물들", "상명아이들"],
-    },
-    {
-      id: 2,
-      lists: ["수플레", "치즈케이크", "빙수"],
-    },
-  ]);
+  const [todos, setTodos] = useState({
+    wooey: [
+      { key: 1, title: "study", content: "react" },
+      { key: 2, title: "study", content: "js" },
+      { key: 3, title: "study", content: "html/css" },
+      { key: 4, title: "play", content: "netflix" },
+      { key: 5, title: "play", content: "sleep" },
+    ],
+  });
+
+  const [boardInputs, setBoardInputs] = useState("");
+  const [todoInputs, setTodoInputs] = useState("");
 
   const [inputs, setInputs] = useState({
     id: "",
@@ -62,6 +68,56 @@ function App() {
     });
   };
 
+  const createTitle = (e) => {
+    if (e.key !== "Enter") return;
+
+    setCategories({
+      [user.userId]: [
+        ...category[user.userId],
+        { key: 10, title: e.target.value },
+      ],
+    });
+    setBoardInputs("");
+  };
+
+  const changeTitle = (e) => {
+    setBoardInputs(e.target.value);
+  };
+
+  const createTodo = (e) => {
+    if (e.key !== "Enter") return;
+
+    setTodos({
+      [user.userId]: [
+        ...todos[user.userId],
+        {
+          key: 10,
+          title: e.target.parentNode.firstElementChild.textContent,
+          content: e.target.value,
+        },
+      ],
+    });
+
+    setTodoInputs("");
+  };
+
+  const changeTodo = (e) => {
+    setTodoInputs(e.target.value);
+  };
+
+  const deleteTodos = (e) => {
+    const id = user.userId;
+    const target = e.target.parentNode.firstElementChild.textContent;
+    const leftT = todos[id].filter(({ title }) => title !== target);
+    const isBlank = todos[id].filter(({ title }) => title === target) === 0;
+    const leftC = category[id].filter(({ title }) => title !== target);
+
+    console.log(leftC);
+    setTodos({ [id]: [...leftT] });
+
+    if (isBlank) setCategories({ [id]: [...leftC] });
+  };
+
   return (
     <>
       <Header
@@ -69,17 +125,27 @@ function App() {
         status={user.status}
         clickLogout={clickLogout}
       />
-      <Login
-        inputs={inputs}
-        status={user.status}
-        inputLogin={inputLogin}
-        clickLogin={clickLogin}
-      />
-      <Board
-        status={user.status}
-        category={category[user.userId]}
-        todos={todos}
-      />
+      {!user.status ? (
+        <Login
+          inputs={inputs}
+          status={user.status}
+          inputLogin={inputLogin}
+          clickLogin={clickLogin}
+        />
+      ) : (
+        <Board
+          status={user.status}
+          category={category[user.userId]}
+          todos={todos[user.userId]}
+          createTitle={createTitle}
+          changeTitle={changeTitle}
+          boardInputs={boardInputs}
+          changeTodo={changeTodo}
+          createTodo={createTodo}
+          todoInputs={todoInputs}
+          deleteTodos={deleteTodos}
+        />
+      )}
     </>
   );
 }
