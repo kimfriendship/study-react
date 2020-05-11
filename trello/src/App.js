@@ -10,6 +10,22 @@ function App() {
     userPw: "asdf",
     status: false,
   });
+
+  const [category, setCategories] = useState({
+    wooey: ["친구들 만나기", "맛난거 먹기"],
+  });
+
+  const [todos, setTodos] = useState([
+    {
+      id: 0,
+      lists: ["멍충이들", "해물들", "상명아이들"],
+    },
+    {
+      id: 2,
+      lists: ["수플레", "치즈케이크", "빙수"],
+    },
+  ]);
+
   const [inputs, setInputs] = useState({
     id: "",
     pw: "",
@@ -59,7 +75,11 @@ function App() {
         inputLogin={inputLogin}
         clickLogin={clickLogin}
       />
-      <Board status={user.status} />
+      <Board
+        status={user.status}
+        category={category[user.userId]}
+        todos={todos}
+      />
     </>
   );
 }

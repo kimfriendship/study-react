@@ -77,3 +77,36 @@
   border-bottom: 2px solid black;
   outline: none;
 }
+
+/* Todos */
+.todosWrapper {
+  margin: 50px 0px;
+  padding: 30px;
+  width: 250px;
+  background-color: lightsteelblue;
+}
+
+.todosTitle {
+  display: inline-block;
+  margin: 10px 20px 10px 10px;
+  font-size: 20px;
+}
+
+.deleteTodosBtn {
+  border: none;
+  font-size: 20px;
+  float: right;
+  background: none;
+}
+
+.inputTodo {
+  width: 200px;
+  line-height: 28px;
+  margin: 23px 23px 5px 23px;
+  font-size: 16px;
+  border: none;
+}
+
+.todo {
+  font-size: 16px;
+}

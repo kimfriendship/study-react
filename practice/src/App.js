@@ -50,7 +50,6 @@ function App() {
     };
 
     setUsers(users.concat(user));
-
     setInputs({
       username: '',
       email: '',
