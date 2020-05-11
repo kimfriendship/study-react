@@ -69,7 +69,7 @@ function App() {
   };
 
   const createTitle = (e) => {
-    if (e.key !== "Enter") return;
+    if (e.key !== "Enter" || e.target.value.trim() === "") return;
 
     setCategories({
       [user.userId]: [
@@ -85,7 +85,7 @@ function App() {
   };
 
   const createTodo = (e) => {
-    if (e.key !== "Enter") return;
+    if (e.key !== "Enter" || e.target.value.trim() === "") return;
 
     setTodos({
       [user.userId]: [

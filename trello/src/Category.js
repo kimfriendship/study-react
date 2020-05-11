@@ -44,7 +44,7 @@ const Category = ({
   deleteTodos,
 }) => {
   return (
-    <>
+    <div style={{ display: "flex" }}>
       {category.map(({ title }) => (
         <CategoryLists
           title={title}
@@ -57,7 +57,7 @@ const Category = ({
           deleteTodos={deleteTodos}
         />
       ))}
-    </>
+    </div>
   );
 };
 
