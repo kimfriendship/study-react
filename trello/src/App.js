@@ -109,13 +109,11 @@ function App() {
     const id = user.userId;
     const target = e.target.parentNode.firstElementChild.textContent;
     const leftT = todos[id].filter(({ title }) => title !== target);
-    const isBlank = todos[id].filter(({ title }) => title === target) === 0;
     const leftC = category[id].filter(({ title }) => title !== target);
-
-    console.log(leftC);
-    setTodos({ [id]: [...leftT] });
+    const isBlank = !todos[id].filter(({ title }) => title === target).length;
 
     if (isBlank) setCategories({ [id]: [...leftC] });
+    setTodos({ [id]: [...leftT] });
   };
 
   return (
