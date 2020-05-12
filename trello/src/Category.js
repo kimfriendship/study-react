@@ -57,7 +57,7 @@ const Category = ({
   deleteTodos,
 }) => {
   return (
-    <div>
+    <div className={st("todosBox")}>
       {/* {category.map(({ title }) => (
         <CategoryLists
           title={title}

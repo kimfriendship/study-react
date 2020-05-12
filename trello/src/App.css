@@ -93,6 +93,12 @@
 }
 
 /* Todos */
+.todosBox {
+  overflow-x: scroll;
+  white-space: nowrap;
+  width: 1670px;
+}
+
 .todosWrapper {
   margin: 70px 20px;
   padding: 30px;
@@ -101,7 +107,6 @@
   background-color: rgb(224, 224, 224);
   display: inline-block;
   vertical-align: top;
-  position: relative;
 }
 
 .todosTitle {
