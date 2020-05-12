@@ -1,38 +1,63 @@
-.App {
+/* Layout */
+.Wrapper {
+  position: relative;
+  padding: 30px;
+  width: 400px;
+  height: 600px;
+  background-color: lightsteelblue;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  font-weight: 800;
+}
+
+.result {
+  font-weight: 600;
+  margin: 50px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.turn {
+  margin: 80px 50px 0;
+  font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.tttWrapper {
+  background: lightyellow;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 200px;
+  left: 75px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+}
+
+.tttWrapper > div {
+  width: 95px;
+  height: 95px;
+  border: 2.5px solid lightsteelblue;
+  cursor: pointer;
+  font-size: 50px;
+  text-align: center;
+  line-height: 95px;
+}
+
+.restartBtn {
+  margin: 400px 45px 10px;
+  font-size: 18px;
+  font-weight: 500;
+  height: 50px;
+  width: 300px;
+  border: none;
+  cursor: pointer;
+}
+
+.restartBtn:hover {
   color: white;
+  background: lightslategrey;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* TTT */
