@@ -11,9 +11,7 @@ const Board = ({
   createTitle,
   boardInputs,
   changeTitle,
-  changeTodo,
   createTodo,
-  todoInputs,
   deleteTodos,
 }) => {
   return (
@@ -32,9 +30,7 @@ const Board = ({
         todos={todos}
         boardInputs={boardInputs}
         changeTitle={changeTitle}
-        changeTodo={changeTodo}
         createTodo={createTodo}
-        todoInputs={todoInputs}
         deleteTodos={deleteTodos}
       />
     </div>

@@ -5,18 +5,12 @@ import Todos from "./Todos";
 
 const st = classNames.bind(style);
 
-const CategoryLists = ({
-  board,
-  todos,
-  changeTodo,
-  createTodo,
-  todoInputs,
-  deleteTodos,
-}) => {
+const CategoryLists = ({ board, todos, createTodo, deleteTodos }) => {
   const [inputState, setInputState] = useState("");
   const changeInput = (e) => {
     setInputState(e.target.value);
   };
+
   return (
     <div className={st("todosWrapper")}>
       <h3 className={st("todosTitle")}>{board.title}</h3>
@@ -42,7 +36,10 @@ const CategoryLists = ({
         className={st("inputTodo")}
         type="text"
         onChange={changeInput}
-        onKeyUp={(e) => createTodo(e, board.key, inputState)}
+        onKeyUp={(e) => {
+          createTodo(e, board.key, inputState);
+          if (e.key === "Enter") setInputState("");
+        }}
         value={inputState}
       />
     </div>
@@ -60,7 +57,7 @@ const Category = ({
   deleteTodos,
 }) => {
   return (
-    <div style={{ display: "flex" }}>
+    <div>
       {/* {category.map(({ title }) => (
         <CategoryLists
           title={title}

@@ -30,7 +30,6 @@ function App() {
   });
 
   const [boardInputs, setBoardInputs] = useState("");
-  const [todoInputs, setTodoInputs] = useState("");
 
   const [inputs, setInputs] = useState({
     id: "",
@@ -71,16 +70,10 @@ function App() {
   const createTitle = (e) => {
     if (e.key !== "Enter" || e.target.value.trim() === "") return;
 
-    // setCategories({
-    //   [user.userId]: [
-    //     ...category[user.userId],
-    //     { key: 10, title: e.target.value },
-    //   ],
-    // });
     setCategories({
       [user.userId]: [
         ...category[user.userId],
-        { key: category.length + 1, title: e.target.value },
+        { key: category[user.userId].length + 1, title: e.target.value },
       ],
     });
     setBoardInputs("");
@@ -91,27 +84,19 @@ function App() {
   };
 
   const createTodo = (e, parentId, inputValue) => {
-    if (e.key == "Enter") {
-      console.log(e.key, parentId, inputValue);
-      setTodos({
-        [user.userId]: [
-          ...todos[user.userId],
-          {
-            key: Math.random(),
-            parentId: parentId,
-            title: e.target.parentNode.firstElementChild.textContent,
-            content: inputValue,
-          },
-        ],
-      });
+    if (e.key !== "Enter" || e.target.value.trim() === "") return;
 
-      setTodoInputs("");
-    }
-  };
-
-  const changeTodo = (e) => {
-    //여기서 새로운 todo 상태를 관리하는 것 같습니다.
-    setTodoInputs(e.target.value);
+    setTodos({
+      [user.userId]: [
+        ...todos[user.userId],
+        {
+          key: Math.random(),
+          parentId: parentId,
+          title: e.target.parentNode.firstElementChild.textContent,
+          content: inputValue,
+        },
+      ],
+    });
   };
 
   const deleteTodos = (e) => {
@@ -132,7 +117,7 @@ function App() {
         status={user.status}
         clickLogout={clickLogout}
       />
-      {user.status ? (
+      {!user.status ? (
         <Login
           inputs={inputs}
           status={user.status}
@@ -147,9 +132,7 @@ function App() {
           createTitle={createTitle}
           changeTitle={changeTitle}
           boardInputs={boardInputs}
-          changeTodo={changeTodo}
           createTodo={createTodo}
-          todoInputs={todoInputs}
           deleteTodos={deleteTodos}
         />
       )}

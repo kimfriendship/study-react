@@ -5,7 +5,6 @@ const TodoLists = ({ lists }) => {
 };
 
 const Todos = ({ todos }) => {
-  console.log(todos);
   return (
     <>
       {todos.map((todo) => (
