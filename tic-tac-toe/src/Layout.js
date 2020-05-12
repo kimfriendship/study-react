@@ -4,7 +4,6 @@ import TTT from "./TTT";
 const Layout = () => {
   const [play, setPlay] = useState(true);
   const [turn, setTurn] = useState("X");
-  const [result, setResult] = useState("");
   const [state, setState] = useState({
     t1: "",
     t2: "",
@@ -16,6 +15,8 @@ const Layout = () => {
     t8: "",
     t9: "",
   });
+
+  const [result, setResult] = useState("");
 
   const onClick = () => {
     setPlay(true);
@@ -38,7 +39,7 @@ const Layout = () => {
       {play ? null : <h2 className={"result"}>{result}</h2>}
       {play ? (
         <h3 className={"turn"}>
-          <strong>{turn}</strong> 의 차례
+          <strong>{turn}</strong>'s turn
         </h3>
       ) : null}
       <div className={"tttWrapper"}>
