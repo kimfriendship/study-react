@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const TTT = ({ state, setState, play, setPlay, turn, setTurn, setResult }) => {
   const onClick = (e) => {
@@ -47,18 +47,17 @@ const TTT = ({ state, setState, play, setPlay, turn, setTurn, setResult }) => {
   const result = checkResult(state);
   const next = checkNext();
 
-  console.log(state);
-  console.log(checkResult(state));
+  useEffect(() => {
+    if (result === undefined && next === 0) {
+      setPlay(false);
+      setResult("DRAW!");
+    }
 
-  if (result === undefined && next === 0) {
-    setPlay(false);
-    setResult("DRAW!");
-  }
-
-  if (result !== undefined) {
-    setPlay(false);
-    setResult(`Winner is ${result}`);
-  }
+    if (result !== undefined) {
+      setPlay(false);
+      setResult(`Winner is ${result}`);
+    }
+  });
 
   return (
     <>
