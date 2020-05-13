@@ -6,6 +6,7 @@ import Category from "./Category";
 const st = classNames.bind(style);
 
 const Board = ({
+  count,
   category,
   todos,
   createTitle,
@@ -14,6 +15,28 @@ const Board = ({
   createTodo,
   deleteTodos,
 }) => {
+  // const getCount = useCallback((category) => {
+  //   console.log(category);
+  //   return category.length;
+  // }, []);
+
+  // const count = getCount(category);
+  // const getCount = (category) => {
+  //   console.log(category);
+  //   return category.length;
+  // };
+
+  // const count = useMemo(() => getCount(category));
+  // const getCount = useCallback(
+  //   (categories, user) => {
+  //     console.log(categories[user].length);
+  //     return categories[user].length;
+  //   },
+  //   [categories]
+  // );
+
+  // const count = getCount(categories, user);
+
   return (
     <div className={st("boardWrapper")}>
       <h2 className={st("boardTitle")}>New Board</h2>
@@ -25,6 +48,7 @@ const Board = ({
         value={boardInputs}
         onChange={changeTitle}
       />
+      <div className={st("count")}>총{count}개</div>
       <Category
         category={category}
         todos={todos}
@@ -37,4 +61,4 @@ const Board = ({
   );
 };
 
-export default Board;
+export default React.memo(Board);

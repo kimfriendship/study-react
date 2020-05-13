@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Login from "./Login.js";
 import Header from "./Header.js";
 import Board from "./Board.js";
@@ -110,6 +110,13 @@ function App() {
     setTodos({ [id]: [...leftT] });
   };
 
+  const getCount = (category) => {
+    console.log(category);
+    return category[user.userId].length;
+  };
+
+  const count = useMemo(() => getCount(category), [category]);
+
   return (
     <>
       <Header
@@ -127,6 +134,9 @@ function App() {
       ) : (
         <Board
           status={user.status}
+          categories={category}
+          count={count}
+          user={user.userId}
           category={category[user.userId]}
           todos={todos[user.userId]}
           createTitle={createTitle}

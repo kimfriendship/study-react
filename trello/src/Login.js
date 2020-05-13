@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames/bind";
 import style from "./App.css";
 
 const st = classNames.bind(style);
 
-const Login = ({ inputs, inputLogin, clickLogin }) => {
+const Login = ({ inputs, inputLogin, clickLogin, status }) => {
+  useEffect(() => {
+    return () => {
+      if (!status) alert("Welcome!");
+    };
+  }, [status]);
+
   return (
     <div className={st("loginWrapper")}>
       <h1 className={st("loginTitle")}>로그인</h1>

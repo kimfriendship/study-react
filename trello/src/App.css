@@ -92,6 +92,10 @@
   outline: none;
 }
 
+.count {
+  display: inline-block;
+}
+
 /* Todos */
 .todosBox {
   overflow-x: scroll;
