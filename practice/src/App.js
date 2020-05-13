@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo, useCallback } from 'react';
 import UserList from './UserList.js';
 import CreateUser from './CreateUser.js';
 
@@ -11,13 +11,17 @@ function App() {
 
   const { username, email } = inputs;
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
+  const onChange = useCallback(
+    (e) => {
+      console.log('writing');
+      const { name, value } = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+    },
+    [inputs],
+  );
 
   const [users, setUsers] = useState([
     {
@@ -40,34 +44,42 @@ function App() {
     },
   ]);
 
+  const checkUsers = (users) => {
+    console.log('counting');
+    return users.filter((user) => user.active).length;
+  };
+
+  const count = useMemo(() => checkUsers(users), [users]);
   const nextId = useRef(4);
 
-  const onCreate = () => {
+  const onCreate = useCallback(() => {
+    console.log('click create');
     const user = {
       id: nextId.current,
       username,
       email,
     };
 
-    setUsers(users.concat(user));
+    setUsers((users) => users.concat(user));
     setInputs({
       username: '',
       email: '',
     });
     nextId.current += 1;
-  };
+  }, [username, email]);
 
-  const onRemove = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
-  };
+  const onRemove = useCallback((id) => {
+    setUsers((users) => users.filter((user) => user.id !== id));
+  }, []);
 
-  const onToggle = (id) => {
-    setUsers(
+  const onToggle = useCallback((id) => {
+    console.log('toggling');
+    setUsers((users) =>
       users.map((user) =>
         user.id === id ? { ...user, active: !user.active } : user,
       ),
     );
-  };
+  }, []);
 
   return (
     <>
@@ -78,6 +90,7 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>{count}</div>
     </>
   );
 }

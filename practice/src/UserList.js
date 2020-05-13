@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const User = ({ user, onRemove, onToggle }) => {
+const User = React.memo(({ user, onRemove, onToggle }) => {
   const { username, email, id, active } = user;
+
+  // useEffect(() => {
+  //   console.log('Mount');
+  //   console.log(user);
+  //   return () => {
+  //     console.log('Unmount');
+  //     console.log(user);
+  //   };
+  // }, [user]);
+
   return (
     <div>
       <b
@@ -17,7 +27,7 @@ const User = ({ user, onRemove, onToggle }) => {
       <button onClick={() => onRemove(id)}>삭제</button>
     </div>
   );
-};
+});
 
 const UserList = ({ users, onRemove, onToggle }) => {
   return (
@@ -34,4 +44,4 @@ const UserList = ({ users, onRemove, onToggle }) => {
   );
 };
 
-export default UserList;
+export default React.memo(UserList);
