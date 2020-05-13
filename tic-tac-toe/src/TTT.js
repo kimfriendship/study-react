@@ -6,47 +6,8 @@ const TTT = ({ state, setState, play, setPlay, turn, setTurn, setResult }) => {
     const leftTurns = values.filter((t) => !t).length;
     const t = e.target.className;
 
-    if (!play) return;
-    if (state[t] !== "") return;
-    if (leftTurns === 0) return;
+    if (state[t] !== "" || !leftTurns || !play) return;
     if (leftTurns === 1) setPlay(false);
-
-    setResult(() => {
-      if ([0, 1, 2].every((n) => values[n] === values[0] && values[n] !== "")) {
-        setPlay(false);
-        return `Winner is ${values[0]}!`;
-      }
-      if ([3, 4, 5].every((n) => values[n] === values[3] && values[n] !== "")) {
-        setPlay(false);
-        return `Winner is ${values[3]}!`;
-      }
-      if ([6, 7, 8].every((n) => values[n] === values[6] && values[n] !== "")) {
-        setPlay(false);
-        return `Winner is ${values[6]}!`;
-      }
-      if ([0, 3, 6].every((n) => values[n] === values[0] && values[n] !== "")) {
-        setPlay(false);
-        return `Winner is ${values[0]}!`;
-      }
-      if ([1, 4, 7].every((n) => values[n] === values[1] && values[n] !== "")) {
-        setPlay(false);
-        return `Winner is ${values[1]}!`;
-      }
-      if ([2, 5, 8].every((n) => values[n] === values[2] && values[n] !== "")) {
-        setPlay(false);
-        return `Winner is ${values[2]}!`;
-      }
-      if ([0, 4, 8].every((n) => values[n] === values[0] && values[n] !== "")) {
-        setPlay(false);
-        return `Winner is ${values[0]}!`;
-      }
-      if ([2, 4, 6].every((n) => values[n] === values[2] && values[n] !== "")) {
-        setPlay(false);
-        return `Winner is ${values[2]}!`;
-      }
-
-      return "DRAW!";
-    });
 
     setTurn(turn === "X" ? "O" : "X");
     setState({
@@ -54,6 +15,50 @@ const TTT = ({ state, setState, play, setPlay, turn, setTurn, setResult }) => {
       [t]: turn,
     });
   };
+
+  const checkNext = () => {
+    const leftTurns = Object.keys(state)
+      .map((t) => state[t])
+      .filter((t) => !t).length;
+    return leftTurns;
+  };
+
+  const checkResult = (s) => {
+    const values = Object.keys(s).map((t) => s[t]);
+
+    if ([0, 1, 2].every((n) => values[n] === values[0] && values[n] !== ""))
+      return values[0];
+    if ([3, 4, 5].every((n) => values[n] === values[3] && values[n] !== ""))
+      return values[3];
+    if ([6, 7, 8].every((n) => values[n] === values[6] && values[n] !== ""))
+      return values[6];
+    if ([0, 3, 6].every((n) => values[n] === values[0] && values[n] !== ""))
+      return values[0];
+    if ([1, 4, 7].every((n) => values[n] === values[1] && values[n] !== ""))
+      return values[1];
+    if ([2, 5, 8].every((n) => values[n] === values[2] && values[n] !== ""))
+      return values[2];
+    if ([0, 4, 8].every((n) => values[n] === values[0] && values[n] !== ""))
+      return values[0];
+    if ([2, 4, 6].every((n) => values[n] === values[2] && values[n] !== ""))
+      return values[2];
+  };
+
+  const result = checkResult(state);
+  const next = checkNext();
+
+  console.log(state);
+  console.log(checkResult(state));
+
+  if (result === undefined && next === 0) {
+    setPlay(false);
+    setResult("DRAW!");
+  }
+
+  if (result !== undefined) {
+    setPlay(false);
+    setResult(`Winner is ${result}`);
+  }
 
   return (
     <>
