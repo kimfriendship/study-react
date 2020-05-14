@@ -1,6 +1,6 @@
 /* Login */
 .loginWrapper {
-  margin-top: 100px;
+  margin-top: 200px;
   position: absolute;
   left: 40%;
   width: 300px;
@@ -101,6 +101,7 @@
   overflow-x: scroll;
   white-space: nowrap;
   width: 1670px;
+  height: 75vh;
 }
 
 .todosWrapper {

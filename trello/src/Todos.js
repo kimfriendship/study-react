@@ -1,8 +1,8 @@
 import React from "react";
 
-const TodoLists = ({ lists }) => {
+const TodoLists = React.memo(({ lists }) => {
   return <li>{lists}</li>;
-};
+});
 
 const Todos = ({ todos }) => {
   return (
@@ -14,4 +14,4 @@ const Todos = ({ todos }) => {
   );
 };
 
-export default Todos;
+export default React.memo(Todos);

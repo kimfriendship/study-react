@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import Login from "./Login.js";
 import Header from "./Header.js";
 import Board from "./Board.js";
@@ -83,21 +83,24 @@ function App() {
     setBoardInputs(e.target.value);
   };
 
-  const createTodo = (e, parentId, inputValue) => {
-    if (e.key !== "Enter" || e.target.value.trim() === "") return;
+  const createTodo = useCallback(
+    (e, parentId, inputValue) => {
+      if (e.key !== "Enter" || e.target.value.trim() === "") return;
 
-    setTodos({
-      [user.userId]: [
-        ...todos[user.userId],
-        {
-          key: Math.random(),
-          parentId: parentId,
-          title: e.target.parentNode.firstElementChild.textContent,
-          content: inputValue,
-        },
-      ],
-    });
-  };
+      setTodos(() => ({
+        [user.userId]: [
+          ...todos[user.userId],
+          {
+            key: Math.random(),
+            parentId: parentId,
+            title: e.target.parentNode.firstElementChild.textContent,
+            content: inputValue,
+          },
+        ],
+      }));
+    },
+    [todos, user.userId]
+  );
 
   const deleteTodos = (e) => {
     const id = user.userId;
@@ -110,12 +113,14 @@ function App() {
     setTodos({ [id]: [...leftT] });
   };
 
-  const getCount = (category) => {
-    console.log(category);
-    return category[user.userId].length;
-  };
+  const getCount = useCallback(
+    (category) => {
+      return category[user.userId].length;
+    },
+    [user.userId]
+  );
 
-  const count = useMemo(() => getCount(category), [category]);
+  const count = useMemo(() => getCount(category), [category, getCount]);
 
   return (
     <>
@@ -133,10 +138,7 @@ function App() {
         />
       ) : (
         <Board
-          status={user.status}
-          categories={category}
           count={count}
-          user={user.userId}
           category={category[user.userId]}
           todos={todos[user.userId]}
           createTitle={createTitle}

@@ -6,8 +6,10 @@ const st = classNames.bind(style);
 
 const Login = ({ inputs, inputLogin, clickLogin, status }) => {
   useEffect(() => {
+    console.log("mount");
     return () => {
       if (!status) alert("Welcome!");
+      console.log("unmount");
     };
   }, [status]);
 

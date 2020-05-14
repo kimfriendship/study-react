@@ -48,7 +48,7 @@ const Board = ({
         value={boardInputs}
         onChange={changeTitle}
       />
-      <div className={st("count")}>총{count}개</div>
+      <div className={st("count")}>총 {count}개</div>
       <Category
         category={category}
         todos={todos}

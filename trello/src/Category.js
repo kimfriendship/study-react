@@ -5,46 +5,48 @@ import Todos from "./Todos";
 
 const st = classNames.bind(style);
 
-const CategoryLists = ({ board, todos, createTodo, deleteTodos }) => {
-  const [inputState, setInputState] = useState("");
-  const changeInput = (e) => {
-    setInputState(e.target.value);
-  };
+const CategoryLists = React.memo(
+  ({ board, todos, createTodo, deleteTodos }) => {
+    const [inputState, setInputState] = useState("");
+    const changeInput = (e) => {
+      setInputState(e.target.value);
+    };
 
-  return (
-    <div className={st("todosWrapper")}>
-      <h3 className={st("todosTitle")}>{board.title}</h3>
-      <button className={st("deleteTodosBtn")} onClick={deleteTodos}>
-        x
-      </button>
-      <ul className={st("todo")}>
-        {/* <Todos todos={todos.filter((todo) => todo.title === title)} /> */}
+    return (
+      <div className={st("todosWrapper")}>
+        <h3 className={st("todosTitle")}>{board.title}</h3>
+        <button className={st("deleteTodosBtn")} onClick={deleteTodos}>
+          x
+        </button>
+        <ul className={st("todo")}>
+          {/* <Todos todos={todos.filter((todo) => todo.title === title)} /> */}
 
-        {/* 보드 안의 todo는 보드(우정님 코드로 치면 cateogory)의 key와 매칭을 시켜야 어떤 보드의 투두인지 알 수 있습니다
+          {/* 보드 안의 todo는 보드(우정님 코드로 치면 cateogory)의 key와 매칭을 시켜야 어떤 보드의 투두인지 알 수 있습니다
         그래서 App.js 가보시면 todo에 카테고리 key값을 parentId라 하려 어떤 보드의 todo인지 매칭을 시켜줬습니다
         또한, 그랬기 때문에 새로운 todo를 생성하실 때도 보드의 key를 parentId로 주셔야 합니다 */}
-        <Todos todos={todos.filter((todo) => todo.parentId === board.key)} />
-      </ul>
-      {/* <input
+          <Todos todos={todos.filter((todo) => todo.parentId === board.key)} />
+        </ul>
+        {/* <input
         className={st("inputTodo")}
         type="text"
         onChange={changeTodo}
         onKeyUp={createTodo}
         value={todoInputs}
       /> */}
-      <input
-        className={st("inputTodo")}
-        type="text"
-        onChange={changeInput}
-        onKeyUp={(e) => {
-          createTodo(e, board.key, inputState);
-          if (e.key === "Enter") setInputState("");
-        }}
-        value={inputState}
-      />
-    </div>
-  );
-};
+        <input
+          className={st("inputTodo")}
+          type="text"
+          onChange={changeInput}
+          onKeyUp={(e) => {
+            createTodo(e, board.key, inputState);
+            if (e.key === "Enter") setInputState("");
+          }}
+          value={inputState}
+        />
+      </div>
+    );
+  }
+);
 
 const Category = ({
   category,
@@ -90,4 +92,4 @@ const Category = ({
   );
 };
 
-export default Category;
+export default React.memo(Category);
