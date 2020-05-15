@@ -1,33 +1,6 @@
 import React, { useReducer } from "react";
 import List from "./List";
-
-const initialState = {
-  info: [{ key: 1, name: "김우정", phone: "01080242242" }],
-  inputs: {
-    name: "",
-    phone: "",
-  },
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "CHANGE_INPUTS":
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.name]: action.value,
-        },
-      };
-    case "CLICK":
-      return {
-        ...state,
-        inputs: initialState.inputs,
-        info: state.info.concat(action.info),
-      };
-    default:
-  }
-};
+import { reducer, initialState } from "./Reducer.js";
 
 const Book = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
