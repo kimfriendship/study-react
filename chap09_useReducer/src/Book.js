@@ -1,30 +1,9 @@
-import React, { useReducer } from "react";
+import React from "react";
 import List from "./List";
-import { reducer, initialState } from "./Reducer.js";
+import useData from "./Hook/useData.js";
 
 const Book = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    dispatch({
-      type: "CHANGE_INPUTS",
-      name,
-      value,
-    });
-  };
-
-  const onClick = () => {
-    dispatch({
-      type: "CLICK",
-      info: {
-        key: Math.random(),
-        name: state.inputs.name,
-        phone: state.inputs.phone,
-      },
-    });
-  };
-
+  const [state, onChange, onClick] = useData();
   return (
     <>
       <div>
