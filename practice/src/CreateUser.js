@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MyContext } from './App.js';
 
-const CreateUser = ({ username, email, onChange, onCreate }) => {
+const CreateUser = () => {
+  const context = useContext(MyContext);
+  const { onChange, username, email, onCreate } = context;
+
   return (
     <div>
       <input

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MyContext } from './App.js';
 
-const User = React.memo(({ user, onRemove, onToggle }) => {
+const User = React.memo(({ user }) => {
+  const context = useContext(MyContext);
+  const { onToggle, onRemove } = context;
   const { username, email, id, active } = user;
 
   // useEffect(() => {
@@ -29,16 +32,14 @@ const User = React.memo(({ user, onRemove, onToggle }) => {
   );
 });
 
-const UserList = ({ users, onRemove, onToggle }) => {
+const UserList = () => {
+  const context = useContext(MyContext);
+  const { users } = context;
+
   return (
     <div>
       {users.map((user) => (
-        <User
-          user={user}
-          key={user.id}
-          onRemove={onRemove}
-          onToggle={onToggle}
-        />
+        <User user={user} key={user.id} />
       ))}
     </div>
   );
