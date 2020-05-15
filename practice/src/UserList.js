@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const User = React.memo(({ user, onRemove, onToggle }) => {
   const { username, email, id, active } = user;

@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ContextSample from './ContextSample';
+// import ContextSample from './ContextSample';
 // import Counter from './Counter';
 
 ReactDOM.render(
   <>
-    <ContextSample />
+    <App />
   </>,
   document.getElementById('root'),
 );
