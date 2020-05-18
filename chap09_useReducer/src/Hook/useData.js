@@ -1,7 +1,7 @@
 import { useReducer, useCallback } from "react";
 import { reducer, initialState } from "../Reducer.js";
 
-const useDate = () => {
+const useData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const onChange = useCallback(
     (e) => {
@@ -29,4 +29,4 @@ const useDate = () => {
   return [state, onChange, onClick];
 };
 
-export default useDate;
+export default useData;

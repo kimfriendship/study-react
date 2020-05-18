@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames/bind";
 import style from "./App.css";
 import Category from "./Category";
@@ -6,6 +6,7 @@ import Category from "./Category";
 const st = classNames.bind(style);
 
 const Board = ({
+  status,
   count,
   category,
   todos,
@@ -36,6 +37,13 @@ const Board = ({
   // );
 
   // const count = getCount(categories, user);
+
+  useEffect(() => {
+    console.log("보드 페이지 mount");
+    return () => {
+      console.log("보드 페이지 unmount");
+    };
+  }, [status]);
 
   return (
     <div className={st("boardWrapper")}>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import Login from "./Login.js";
 import Header from "./Header.js";
 import Board from "./Board.js";
@@ -122,6 +122,13 @@ function App() {
 
   const count = useMemo(() => getCount(category), [category, getCount]);
 
+  useEffect(() => {
+    console.log("app mount");
+    return () => {
+      console.log("app unmount");
+    };
+  }, [user]);
+
   return (
     <>
       <Header
@@ -139,6 +146,7 @@ function App() {
       ) : (
         <Board
           count={count}
+          status={user.status}
           category={category[user.userId]}
           todos={todos[user.userId]}
           createTitle={createTitle}
