@@ -1,11 +1,12 @@
 import React, { useReducer, useEffect } from "react";
 import { moviesApi } from "../api";
+import "../App.css";
 
 const reducer = (mainState, action) => {
   switch (action.type) {
     case "SUCCESS":
       return {
-        data: null,
+        data: action.data,
         error: null,
         loading: false,
       };
@@ -22,7 +23,7 @@ const reducer = (mainState, action) => {
         loading: true,
       };
     default:
-      return mainState;
+      throw new Error("ERROR");
   }
 };
 
@@ -51,15 +52,24 @@ const Main = () => {
   const { data: movies, error, loading } = mainState;
   if (loading) return <div>Loading...</div>;
   if (error) return <div>ERROR</div>;
-  if (!movies) return null;
+  if (!movies) return <div>NO DATA</div>;
 
   return (
     <div>
-      <ul>
-        {movies.map((movie) => {
+      <ul className={"movieList"}>
+        {movies.map((movie, order) => {
           return (
-            <li key={movie.id}>
-              {movie.original_title}: {movie.popularity}
+            <li className={"movie"} key={movie.id}>
+              <img
+                className={"poster"}
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt=""
+              />
+              <span className={"order"}>{order + 1}</span>
+              <div className={"detail"}>
+                <span className={"votes"}>추천수 {movie.vote_count}</span>
+                <span className={"title"}>{movie.title}</span>
+              </div>
             </li>
           );
         })}
