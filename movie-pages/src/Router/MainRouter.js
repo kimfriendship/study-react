@@ -9,8 +9,8 @@ const MainRouter = () => {
     <div>
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route path="/about" component={About} />
         <Route path="/latest" component={Latest} />
+        <Route path="/about" component={About} />
         <Route
           render={({ location }) => (
             <div>

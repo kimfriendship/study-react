@@ -14,17 +14,17 @@ function App() {
       <ul className={"nav"}>
         <li className={"menu"}>
           <NavLink exact to="/" activeStyle={activeStyle}>
-            Main
+            Popular
+          </NavLink>
+        </li>
+        <li className={"menu"}>
+          <NavLink to="/latest" activeStyle={activeStyle}>
+            Upcoming
           </NavLink>
         </li>
         <li className={"menu"}>
           <NavLink to="/about" activeStyle={activeStyle}>
             About
-          </NavLink>
-        </li>
-        <li className={"menu"}>
-          <NavLink to="/latest" activeStyle={activeStyle}>
-            Latest
           </NavLink>
         </li>
       </ul>

@@ -25,7 +25,8 @@
 
 /* main page */
 .movieList {
-  margin: 50px 30px;
+  width: 85vw;
+  margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -37,17 +38,19 @@
   position: relative;
   padding: 30px;
   height: 550px;
+  margin: 0 auto;
 }
 
 .poster {
   width: 300px;
   height: 400px;
+  margin-bottom: 15px;
 }
 
 .detail {
   display: inline-block;
   position: absolute;
-  top: 448px;
+  top: 462px;
   left: 120px;
 }
 
