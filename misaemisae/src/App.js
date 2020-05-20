@@ -20,15 +20,24 @@ function App() {
 
   return (
     <>
-      <ul>
+      <ul className={"misaeLists"}>
         {misae.map((m) => {
           return (
-            <li key={m.MSRSTE_NM}>
-              {m.MSRSTE_NM}: {m.IDEX_NM}
+            <li
+              key={m.MSRSTE_NM}
+              style={{
+                background: m.IDEX_NM === "좋음" ? "skyblue" : "seagreen",
+              }}
+            >
+              {m.MSRSTE_NM}
+              <span className={"state"}>{m.IDEX_NM}</span>
             </li>
           );
         })}
       </ul>
+      <button onClick={() => fetchMisae()} className={"fetchBtn"}>
+        Refetch
+      </button>
     </>
   );
 }
