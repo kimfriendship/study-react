@@ -39,7 +39,6 @@ const Main = () => {
     try {
       const response = await moviesApi.getPopular();
       dispatch({ type: "SUCCESS", data: response.results });
-      console.log(response.results);
     } catch (e) {
       dispatch({ type: "ERROR", error: e });
     }

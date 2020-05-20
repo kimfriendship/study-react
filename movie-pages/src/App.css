@@ -1,5 +1,29 @@
+/* header */
+.header {
+  text-align: center;
+  font-weight: 900;
+  margin: 10px;
+}
+
+.nav {
+  margin: 0;
+  display: flex;
+  list-style: none;
+  font-size: 25px;
+  background: tomato;
+}
+
+.nav > .menu {
+  text-decoration: none !important;
+  padding: 10px;
+  color: white;
+}
+
+/* main page */
 .movieList {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .movie {
@@ -14,12 +38,11 @@
 }
 
 .order {
-  /* height: 250px; */
   font-size: 70px;
   font-weight: bolder;
   color: tomato;
   font-style: italic;
-  display: inline-block;
+  display: block;
   margin-right: 20px;
 }
 
@@ -34,4 +57,5 @@
 .title {
   font-size: 30px;
   display: block;
+  width: 300px;
 }

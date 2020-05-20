@@ -11,25 +11,24 @@ function App() {
 
   return (
     <div className="App">
-      <h1>MOVIE PAGE</h1>
-      <ul>
-        <li>
+      <h1 className={"header"}>MOVIE PAGE</h1>
+      <ul className={"nav"}>
+        <li className={"menu"}>
           <NavLink exact to="/" activeStyle={activeStyle}>
             Main
           </NavLink>
         </li>
-        <li>
+        <li className={"menu"}>
           <NavLink to="/about" activeStyle={activeStyle}>
             About
           </NavLink>
         </li>
-        <li>
+        <li className={"menu"}>
           <NavLink to="/latest" activeStyle={activeStyle}>
             Latest
           </NavLink>
         </li>
       </ul>
-      <hr />
       <MainRouter />
     </div>
   );
