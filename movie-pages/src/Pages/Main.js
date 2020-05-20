@@ -68,7 +68,7 @@ const Main = () => {
                 {order < 9 ? "0" + (order + 1) : order + 1}
               </span>
               <div className={"detail"}>
-                <span className={"votes"}>추천수 {movie.vote_count}</span>
+                <span className={"votes"}>👍{movie.vote_count}</span>
                 <span className={"title"}>{movie.title}</span>
               </div>
             </li>

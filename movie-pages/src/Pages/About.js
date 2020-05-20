@@ -1,11 +1,7 @@
 import React from "react";
 
 const About = () => {
-  return (
-    <div>
-      <div></div>
-    </div>
-  );
+  return <p className={"about"}>Made by Woojung Kim</p>;
 };
 
 export default About;

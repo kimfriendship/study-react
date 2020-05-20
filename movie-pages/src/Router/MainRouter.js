@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Main from "../Pages/Main";
 import About from "../Pages/About";
 import Latest from "../Pages/Latest";
+import Search from "../Pages/Search";
 
 const MainRouter = () => {
   return (
@@ -10,6 +11,7 @@ const MainRouter = () => {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/latest" component={Latest} />
+        <Route path="/search" component={Search} />
         <Route path="/about" component={About} />
         <Route
           render={({ location }) => (

@@ -1,61 +1,81 @@
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* header */
 .header {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  background: tomato;
+  margin: 0;
+  padding: 0;
+}
+
+.name {
   text-align: center;
   font-weight: 900;
-  margin: 15px;
+  font-size: 30px;
+  color: white;
 }
 
 .nav {
-  padding: 5px 50px;
+  padding: 10px 20%;
   margin: 0;
   display: flex;
   list-style: none;
-  font-size: 25px;
-  background: tomato;
+  font-size: 20px;
 }
 
 .menu {
-  padding: 10px;
+  padding: 0 10px 10px;
+  margin: 0 auto;
 }
 
 .menu > a {
   color: white;
   text-decoration: none;
+  padding: 5px 10px;
 }
 
 /* main page */
 .movieList {
   width: 85vw;
-  margin: 50px auto;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  padding: 0;
+  padding: 150px 0 0;
 }
 
 .movie {
   list-style: none;
   position: relative;
   padding: 30px;
-  height: 550px;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .poster {
+  display: block;
+  background: lightgrey;
   width: 300px;
   height: 400px;
   margin-bottom: 15px;
+  border-radius: 15px;
 }
 
 .detail {
   display: inline-block;
   position: absolute;
-  top: 462px;
+  top: 460px;
   left: 120px;
 }
 
 .order {
-  font-size: 60px;
+  font-size: 65px;
   font-weight: bolder;
   color: tomato;
   font-style: italic;
@@ -71,4 +91,26 @@
   font-size: 25px;
   display: block;
   width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* latest page */
+.upcomingTitle {
+  font-size: 25px;
+  display: block;
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* about page */
+.about {
+  width: 100%;
+  margin: 0;
+  padding-top: 300px;
+  text-align: center;
 }

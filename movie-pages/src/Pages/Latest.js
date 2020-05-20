@@ -2,7 +2,7 @@ import React, { useReducer, useEffect } from "react";
 import { moviesApi } from "../api";
 import "../App.css";
 
-const reducer = (mainState, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case "SUCCESS":
       return {
@@ -28,28 +28,27 @@ const reducer = (mainState, action) => {
 };
 
 const Latest = () => {
-  const [mainState, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useReducer(reducer, {
     data: null,
     error: null,
     loading: false,
   });
 
-  const fetchMain = async () => {
+  const fetchLatest = async () => {
     dispatch({ type: "LOADING" });
     try {
       const response = await moviesApi.getUpcoming();
       dispatch({ type: "SUCCESS", data: response.results });
-      console.log(response.results);
     } catch (e) {
       dispatch({ type: "ERROR", error: e });
     }
   };
 
   useEffect(() => {
-    fetchMain();
+    fetchLatest();
   }, []);
 
-  const { data: movies, error, loading } = mainState;
+  const { data: movies, error, loading } = state;
   if (loading) return <div>Loading...</div>;
   if (error) return <div>ERROR</div>;
   if (!movies) return <div>NO DATA</div>;
@@ -62,16 +61,13 @@ const Latest = () => {
             <li className={"movie"} key={movie.id}>
               <img
                 className={"poster"}
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt=""
+                src={
+                  movie.poster_path &&
+                  `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                }
+                alt={movie.title}
               />
-              <span className={"order"}>
-                {order < 9 ? "0" + (order + 1) : order + 1}
-              </span>
-              <div className={"detail"}>
-                <span className={"votes"}>추천수 {movie.vote_count}</span>
-                <span className={"title"}>{movie.title}</span>
-              </div>
+              <span className={"upcomingTitle"}>{movie.title}</span>
             </li>
           );
         })}
