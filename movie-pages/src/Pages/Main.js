@@ -54,7 +54,7 @@ const Main = () => {
   if (!movies) return <div>NO DATA</div>;
 
   return (
-    <div>
+    <>
       <ul className={"movieList"}>
         {movies.map((movie, order) => {
           return (
@@ -64,7 +64,9 @@ const Main = () => {
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt=""
               />
-              <span className={"order"}>{order + 1}</span>
+              <span className={"order"}>
+                {order < 9 ? "0" + (order + 1) : order + 1}
+              </span>
               <div className={"detail"}>
                 <span className={"votes"}>추천수 {movie.vote_count}</span>
                 <span className={"title"}>{movie.title}</span>
@@ -73,7 +75,7 @@ const Main = () => {
           );
         })}
       </ul>
-    </div>
+    </>
   );
 };
 

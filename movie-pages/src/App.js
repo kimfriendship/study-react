@@ -5,8 +5,7 @@ import MainRouter from "./Router/MainRouter";
 
 function App() {
   const activeStyle = {
-    background: "lightcyan",
-    color: "seagreen",
+    textDecoration: "underline",
   };
 
   return (

@@ -2,10 +2,11 @@
 .header {
   text-align: center;
   font-weight: 900;
-  margin: 10px;
+  margin: 15px;
 }
 
 .nav {
+  padding: 5px 50px;
   margin: 0;
   display: flex;
   list-style: none;
@@ -13,23 +14,29 @@
   background: tomato;
 }
 
-.nav > .menu {
-  text-decoration: none !important;
+.menu {
   padding: 10px;
+}
+
+.menu > a {
   color: white;
+  text-decoration: none;
 }
 
 /* main page */
 .movieList {
+  margin: 50px 30px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  padding: 0;
 }
 
 .movie {
   list-style: none;
   position: relative;
   padding: 30px;
+  height: 550px;
 }
 
 .poster {
@@ -37,8 +44,15 @@
   height: 400px;
 }
 
+.detail {
+  display: inline-block;
+  position: absolute;
+  top: 448px;
+  left: 120px;
+}
+
 .order {
-  font-size: 70px;
+  font-size: 60px;
   font-weight: bolder;
   color: tomato;
   font-style: italic;
@@ -46,16 +60,12 @@
   margin-right: 20px;
 }
 
-.detail {
-  display: inline-block;
-}
-
 .votes {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .title {
-  font-size: 30px;
+  font-size: 25px;
   display: block;
-  width: 300px;
+  width: 200px;
 }
