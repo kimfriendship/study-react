@@ -51,7 +51,16 @@ const Latest = () => {
   }, []);
 
   const { data: movies, error, loading } = state;
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className={"loadingWrapper"}>
+        <img
+          className={"loading"}
+          src="https://media.giphy.com/media/ycfHiJV6WZnQDFjSWH/giphy.gif"
+          alt="loading"
+        />
+      </div>
+    );
   if (error) return <div>ERROR</div>;
   if (!movies) return <div>NO DATA</div>;
 

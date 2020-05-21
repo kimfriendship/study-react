@@ -90,6 +90,20 @@ const Search = () => {
     searchMovies();
   }, [term]);
 
+  const { loading, error, data } = pageState;
+  if (loading) {
+    return (
+      <div className={"loadingWrapper"}>
+        <img
+          className={"loading"}
+          src="https://media.giphy.com/media/ycfHiJV6WZnQDFjSWH/giphy.gif"
+          alt="loading"
+        />
+      </div>
+    );
+  }
+  if (error) return <div>ERROR</div>;
+
   return (
     <div className={"searchWrapper"}>
       <input

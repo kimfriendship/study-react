@@ -28,7 +28,7 @@ const reducer = (state, action) => {
   }
 };
 
-const Detail = () => {
+const Detail = ({ history }) => {
   const params = useParams();
   const id = params.movie_id;
 
@@ -53,7 +53,17 @@ const Detail = () => {
   }, []);
 
   const { loading, error, data } = state;
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className={"loadingWrapper"}>
+        <img
+          className={"loading"}
+          src="https://media.giphy.com/media/ycfHiJV6WZnQDFjSWH/giphy.gif"
+          alt="loading"
+        />
+      </div>
+    );
+  }
   if (error) return <div>ERROR</div>;
   if (!data) return null;
 
@@ -75,13 +85,16 @@ const Detail = () => {
       <div className={"infoWrapper"}>
         <h2 className={"detailTitle"}>{title}</h2>
         <strong>{date}</strong>
+        <ul className={"genres"}>
+          {genres.map((g) => (
+            <li key={g.id}>#{g.name}</li>
+          ))}
+        </ul>
         <p className={"overview"}>{overview}</p>
-        {genres.map((g) => (
-          <span className={"genres"} key={g.id}>
-            #{g.name}
-          </span>
-        ))}
       </div>
+      <button className={"gobackBtn"} onClick={() => history.goBack()}>
+        Go back
+      </button>
     </article>
   );
 };
