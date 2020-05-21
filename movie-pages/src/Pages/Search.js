@@ -8,21 +8,18 @@ const pageReducer = (pageState, action) => {
       return {
         data: action.data,
         error: null,
-        history: null,
         loading: false,
       };
     case "ERROR":
       return {
         data: null,
         error: action.error,
-        history: null,
         loading: false,
       };
     case "LOADING":
       return {
         data: null,
         error: null,
-        history: null,
         loading: true,
       };
     default:
@@ -36,11 +33,13 @@ const termReducer = (termState, action) => {
       return {
         input: action.input,
         term: "",
+        history: [...termState.history],
       };
     case "GET":
       return {
         input: "",
         term: action.term,
+        history: [...termState.history, action.history],
       };
     default:
       throw new Error("ERROR");
@@ -51,16 +50,16 @@ const Search = () => {
   const [pageState, pageDispatch] = useReducer(pageReducer, {
     data: null,
     error: null,
-    history: null,
     loading: false,
   });
 
   const [termState, termDispatch] = useReducer(termReducer, {
     input: "",
     term: "",
+    history: [],
   });
 
-  const { input, term } = termState;
+  const { input, term, history } = termState;
 
   const changeInput = (e) => {
     termDispatch({ type: "CHANGE", input: e.target.value });
@@ -68,20 +67,26 @@ const Search = () => {
 
   const getInput = (e) => {
     if (e.key !== "Enter") return;
-    termDispatch({ type: "GET", term: e.target.value });
+    const newTerm = e.target.value;
+    termDispatch({ type: "GET", term: newTerm, history: newTerm });
   };
 
-  const searchMovies = async () => {
+  const searchMovies = async (word = term) => {
     pageDispatch({ type: "LOADING" });
     try {
-      const response = await moviesApi.searchMovies(term);
+      const response = await moviesApi.searchMovies(word);
       pageDispatch({ type: "SUCCESS", data: response.data.results });
     } catch (e) {
       pageDispatch({ type: "ERROR", error: e });
     }
   };
 
+  const clickHistory = (e) => {
+    searchMovies(e.target.textContent);
+  };
+
   useEffect(() => {
+    if (!term) return;
     searchMovies();
   }, [term]);
 
@@ -96,9 +101,21 @@ const Search = () => {
         value={input}
       />
       <ul className={"historyList"}>
-        <li className={"history"}>history</li>
+        {history &&
+          history.map((h, i) => {
+            return (
+              <li
+                key={i}
+                value={h}
+                className={"history"}
+                onClick={clickHistory}
+              >
+                {h}
+              </li>
+            );
+          })}
       </ul>
-      <ul className={"movieList"}>
+      <ul className={"searchList"}>
         {pageState.data &&
           pageState.data.map((movie) => {
             return (
