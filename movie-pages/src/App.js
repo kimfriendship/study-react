@@ -7,7 +7,8 @@ function App() {
   const activeStyle = {
     borderRadius: "5px",
     background: "white",
-    color: "tomato",
+    color: "#E03F47",
+    fontWeight: "Bold",
   };
 
   return (

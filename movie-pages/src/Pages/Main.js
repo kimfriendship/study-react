@@ -1,6 +1,8 @@
 import React, { useReducer, useEffect } from "react";
 import { moviesApi } from "../api";
 import "../App.css";
+import SubMainRouter from "../Router/SubMainRouter";
+import { NavLink } from "react-router-dom";
 
 const reducer = (mainState, action) => {
   switch (action.type) {
@@ -59,22 +61,33 @@ const Main = () => {
         {movies.map((movie, order) => {
           return (
             <li className={"movie"} key={movie.id}>
-              <img
-                className={"poster"}
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt=""
-              />
-              <span className={"order"}>
-                {order < 9 ? "0" + (order + 1) : order + 1}
-              </span>
-              <div className={"detail"}>
-                <span className={"votes"}>👍{movie.vote_count}</span>
-                <span className={"title"}>{movie.title}</span>
-              </div>
+              <NavLink
+                to={"/" + movie.id}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <img
+                  className={"poster"}
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                />
+                <span className={"order"}>
+                  {order < 9 ? "0" + (order + 1) : order + 1}
+                </span>
+                <div className={"detail"}>
+                  <span className={"votes"}>
+                    <span role="img" aria-label="thumbUp">
+                      👍
+                    </span>
+                    {movie.vote_count}
+                  </span>
+                  <span className={"title"}>{movie.title}</span>
+                </div>
+              </NavLink>
             </li>
           );
         })}
       </ul>
+      <SubMainRouter />
     </>
   );
 };

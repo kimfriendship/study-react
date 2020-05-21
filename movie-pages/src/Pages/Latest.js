@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { moviesApi } from "../api";
+import { NavLink } from "react-router-dom";
 import "../App.css";
 
 const reducer = (state, action) => {
@@ -59,15 +60,20 @@ const Latest = () => {
         {movies.map((movie, order) => {
           return (
             <li className={"movie"} key={movie.id}>
-              <img
-                className={"poster"}
-                src={
-                  movie.poster_path &&
-                  `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                }
-                alt={movie.title}
-              />
-              <span className={"upcomingTitle"}>{movie.title}</span>
+              <NavLink
+                to={"/" + movie.id}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <img
+                  className={"poster"}
+                  src={
+                    movie.poster_path &&
+                    `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  }
+                  alt={movie.title}
+                />
+                <span className={"upcomingTitle"}>{movie.title}</span>
+              </NavLink>
             </li>
           );
         })}
