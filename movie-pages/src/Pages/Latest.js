@@ -57,7 +57,7 @@ const Latest = () => {
   return (
     <>
       <ul className={"movieList"}>
-        {movies.map((movie, order) => {
+        {movies.map((movie) => {
           return (
             <li className={"movie"} key={movie.id}>
               <NavLink

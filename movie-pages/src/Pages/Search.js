@@ -1,31 +1,46 @@
 import React, { useEffect, useReducer } from "react";
 import { moviesApi } from "../api";
+import { NavLink } from "react-router-dom";
 
-const reducer = (state, action) => {
+const pageReducer = (pageState, action) => {
   switch (action.type) {
     case "SUCCESS":
       return {
-        data: null,
+        data: action.data,
         error: null,
         history: null,
         loading: false,
-        inputs: "",
       };
     case "ERROR":
       return {
         data: null,
-        error: null,
+        error: action.error,
         history: null,
         loading: false,
-        inputs: "",
       };
     case "LOADING":
       return {
         data: null,
         error: null,
         history: null,
-        loading: false,
-        inputs: "",
+        loading: true,
+      };
+    default:
+      throw new Error("ERROR");
+  }
+};
+
+const termReducer = (termState, action) => {
+  switch (action.type) {
+    case "CHANGE":
+      return {
+        input: action.input,
+        term: "",
+      };
+    case "GET":
+      return {
+        input: "",
+        term: action.term,
       };
     default:
       throw new Error("ERROR");
@@ -33,28 +48,42 @@ const reducer = (state, action) => {
 };
 
 const Search = () => {
-  const [state, dispatch] = useReducer(reducer, {
+  const [pageState, pageDispatch] = useReducer(pageReducer, {
     data: null,
     error: null,
     history: null,
     loading: false,
-    inputs: "",
   });
 
-  const getInputs = (e) => {
-    // if (e.)
+  const [termState, termDispatch] = useReducer(termReducer, {
+    input: "",
+    term: "",
+  });
+
+  const { input, term } = termState;
+
+  const changeInput = (e) => {
+    termDispatch({ type: "CHANGE", input: e.target.value });
   };
 
-  const searchMovies = async (term) => {
-    dispatch({ type: "LOADING" });
+  const getInput = (e) => {
+    if (e.key !== "Enter") return;
+    termDispatch({ type: "GET", term: e.target.value });
+  };
+
+  const searchMovies = async () => {
+    pageDispatch({ type: "LOADING" });
     try {
       const response = await moviesApi.searchMovies(term);
-      console.log(response);
-      dispatch({ type: "SUCCESS", data: response });
+      pageDispatch({ type: "SUCCESS", data: response.data.results });
     } catch (e) {
-      dispatch({ type: "ERROR", error: e });
+      pageDispatch({ type: "ERROR", error: e });
     }
   };
+
+  useEffect(() => {
+    searchMovies();
+  }, [term]);
 
   return (
     <div className={"searchWrapper"}>
@@ -62,12 +91,35 @@ const Search = () => {
         className={"searchBox"}
         placeholder={"Search movies!"}
         type="text"
+        onChange={changeInput}
+        onKeyUp={getInput}
+        value={input}
       />
       <ul className={"historyList"}>
         <li className={"history"}>history</li>
       </ul>
       <ul className={"movieList"}>
-        <li className={"movies"}>movies</li>
+        {pageState.data &&
+          pageState.data.map((movie) => {
+            return (
+              <li className={"movie"} key={movie.id}>
+                <NavLink
+                  to={"/" + movie.id}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <img
+                    className={"poster"}
+                    src={
+                      movie.poster_path &&
+                      `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    }
+                    alt={movie.title}
+                  />
+                  <span className={"upcomingTitle"}>{movie.title}</span>
+                </NavLink>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

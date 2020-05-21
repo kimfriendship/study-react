@@ -141,5 +141,6 @@ html {
   height: 40px;
   margin: 0 auto;
   border: none;
-  border-bottom: 3px solid tomato;
+  border-bottom: 5px solid tomato;
+  outline: none;
 }
