@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import { moviesApi } from "../api";
 import "../App.css";
-import SubMainRouter from "../Router/SubMainRouter";
+import SubRouter from "../Router/SubRouter";
 import { NavLink } from "react-router-dom";
 
 const reducer = (mainState, action) => {
@@ -87,7 +87,7 @@ const Main = () => {
           );
         })}
       </ul>
-      <SubMainRouter />
+      <SubRouter />
     </>
   );
 };

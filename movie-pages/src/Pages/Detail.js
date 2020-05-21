@@ -28,7 +28,7 @@ const reducer = (state, action) => {
   }
 };
 
-const EachUpcoming = () => {
+const Detail = () => {
   const params = useParams();
   const id = params.movie_id;
 
@@ -78,4 +78,4 @@ const EachUpcoming = () => {
   );
 };
 
-export default EachUpcoming;
+export default Detail;

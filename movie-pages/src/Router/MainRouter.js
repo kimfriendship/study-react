@@ -4,8 +4,7 @@ import Main from "../Pages/Main";
 import About from "../Pages/About";
 import Latest from "../Pages/Latest";
 import Search from "../Pages/Search";
-import EachPopular from "../Pages/EachPopular";
-import EachUpcoming from "../Pages/EachUpcoming";
+import Detail from "../Pages/Detail";
 
 const MainRouter = () => {
   return (
@@ -15,8 +14,7 @@ const MainRouter = () => {
         <Route path="/latest" component={Latest} />
         <Route path="/search" component={Search} />
         <Route path="/about" component={About} />
-        <Route path="/:movie_id" component={EachPopular} />
-        <Route path="/:movie_id" component={EachUpcoming} />
+        <Route path="/:movie_id" component={Detail} />
         <Route
           render={({ location }) => (
             <div className={"noPage"}>

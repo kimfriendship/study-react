@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from "react";
 import { moviesApi } from "../api";
 import { NavLink } from "react-router-dom";
 import "../App.css";
+import SubRouter from "../Router/SubRouter";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -78,6 +79,7 @@ const Latest = () => {
           );
         })}
       </ul>
+      <SubRouter />
     </>
   );
 };
