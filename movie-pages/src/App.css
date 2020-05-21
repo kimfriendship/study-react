@@ -48,7 +48,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  padding: 150px 0 0;
+  padding: 250px 0 0;
 }
 
 .movie {
@@ -122,12 +122,6 @@ html {
   padding-top: 300px;
 }
 
-/* each page */
-.eachMovie {
-  margin: 0;
-  padding-top: 300px;
-}
-
 /* search page */
 .searchWrapper {
   margin: 0 auto;
@@ -137,6 +131,7 @@ html {
 
 .searchBox {
   display: block;
+  font-size: 1.4rem;
   width: 70%;
   height: 40px;
   margin: 0 auto;
@@ -176,4 +171,51 @@ html {
 .history:hover {
   color: white;
   background-color: tomato;
+}
+
+/* detail page */
+.eachMovie {
+  width: 60%;
+  margin: 0 auto;
+  padding-top: 250px;
+  position: relative;
+}
+
+.detailPoster {
+  display: block;
+  background: lightgrey;
+  width: 20%;
+  min-width: 400px;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
+
+.infoWrapper {
+  position: absolute;
+  top: 38%;
+  left: 45%;
+}
+
+.infoWrapper > * {
+  font-size: 1.2rem;
+}
+
+.detailTitle {
+  color: tomato;
+  font-size: 2.5rem;
+  margin: 15px 0 30px;
+}
+
+.overview {
+  padding-bottom: 30px;
+}
+
+.genres {
+  font-size: 1.1rem;
+  padding: 10px 15px;
+  margin: 0 10px 0 0;
+  border-radius: 15px;
+  background: tomato;
+  color: white;
 }

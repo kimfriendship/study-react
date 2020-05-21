@@ -67,13 +67,21 @@ const Detail = () => {
 
   return (
     <article className={"eachMovie"}>
-      <img src={"https://image.tmdb.org/t/p/w500" + poster} alt={title} />
-      <h2>{title}</h2>
-      <span>{date}</span>
-      <p>{overview}</p>
-      {genres.map((g) => (
-        <span key={g.id}>#{g.name}</span>
-      ))}
+      <img
+        className={"detailPoster"}
+        src={"https://image.tmdb.org/t/p/w500" + poster}
+        alt={title}
+      />
+      <div className={"infoWrapper"}>
+        <h2 className={"detailTitle"}>{title}</h2>
+        <strong>{date}</strong>
+        <p className={"overview"}>{overview}</p>
+        {genres.map((g) => (
+          <span className={"genres"} key={g.id}>
+            #{g.name}
+          </span>
+        ))}
+      </div>
     </article>
   );
 };
