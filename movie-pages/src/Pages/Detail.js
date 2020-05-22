@@ -49,6 +49,7 @@ const Detail = ({ history }) => {
   };
 
   useEffect(() => {
+    if (id === "latest") return;
     fetchMovie();
   }, []);
 
@@ -58,7 +59,7 @@ const Detail = ({ history }) => {
       <div className={"loadingWrapper"}>
         <img
           className={"loading"}
-          src="https://media.giphy.com/media/ycfHiJV6WZnQDFjSWH/giphy.gif"
+          src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
           alt="loading"
         />
       </div>
@@ -91,10 +92,10 @@ const Detail = ({ history }) => {
           ))}
         </ul>
         <p className={"overview"}>{overview}</p>
+        <button className={"gobackBtn"} onClick={() => history.goBack()}>
+          Go back
+        </button>
       </div>
-      <button className={"gobackBtn"} onClick={() => history.goBack()}>
-        Go back
-      </button>
     </article>
   );
 };

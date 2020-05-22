@@ -56,7 +56,7 @@ const Main = () => {
       <div className={"loadingWrapper"}>
         <img
           className={"loading"}
-          src="https://media.giphy.com/media/ycfHiJV6WZnQDFjSWH/giphy.gif"
+          src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
           alt="loading"
         />
       </div>

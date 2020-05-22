@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import { moviesApi } from "../api";
 import { NavLink } from "react-router-dom";
 
-const pageReducer = (pageState, action) => {
+export const pageReducer = (pageState, action) => {
   switch (action.type) {
     case "SUCCESS":
       return {
@@ -27,7 +27,7 @@ const pageReducer = (pageState, action) => {
   }
 };
 
-const termReducer = (termState, action) => {
+export const termReducer = (termState, action) => {
   switch (action.type) {
     case "CHANGE":
       return {
@@ -96,7 +96,7 @@ const Search = () => {
       <div className={"loadingWrapper"}>
         <img
           className={"loading"}
-          src="https://media.giphy.com/media/ycfHiJV6WZnQDFjSWH/giphy.gif"
+          src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
           alt="loading"
         />
       </div>
