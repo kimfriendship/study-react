@@ -7,33 +7,42 @@ const News = () => {
   const getNews = async () => {
     try {
       const url =
-        "https://newsapi.org/v2/top-headlines?country=kr&apiKey=72fb5a6e9f6e4a5c92b4c3336ac99755";
-
+        "/v2/top-headlines?country=kr&apiKey=72fb5a6e9f6e4a5c92b4c3336ac99755";
       const response = await axios.get(url);
-      // , {
-      //   headers: {
-      //     "x-apikey": "72fb5a6e9f6e4a5c92b4c3336ac99755",
-      //     "Access-Control-Allow-Origin": "*",
-      //     "Access-Control-Allow-Methods": "GET, PUT, DELETE, PATCH, OPTIONS",
-      //     "Access-Control-Allow-Credentials": true,
-      //   },
-      //   responseType: "json",
-      // });
-      console.log(response.data);
+      setData(response.data.articles);
+      console.log(response.data.articles);
     } catch (e) {
       console.log(e);
     }
   };
 
-  // useEffect(() => {
-  //   getNews();
-  // }, []);
+  useEffect(() => {
+    getNews();
+  }, []);
 
   return (
     <div>
-      <div>Today's</div>
-      <button onClick={getNews}>불러오기</button>
-      {data && <textarea rows={7} value={JSON.stringify(data, null, 2)} />}
+      <ul className={"newsList"}>
+        {data &&
+          data.map((news, i) => {
+            return (
+              <li className={"news"} key={i}>
+                <a href={news.url} className={"title"}>
+                  <strong>{news.title}</strong>
+                </a>
+                <img
+                  className={"thumbnail"}
+                  src={news.urlToImage}
+                  alt="뉴스 썸네일"
+                />
+                <p className={"detail"}>
+                  <strong>{news.publishedAt}</strong>
+                  {news.description}
+                </p>
+              </li>
+            );
+          })}
+      </ul>
     </div>
   );
 };
