@@ -1,37 +1,37 @@
 import React from "react";
 import Counter from "../components/Counter";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { connect } from "react-redux";
 import { increase, decrease, setDiff } from "../modules/counter";
 
-const CounterContainer = () => {
-  const { number, diff } = useSelector(
-    (state) => ({
-      number: state.counter.number,
-      diff: state.counter.diff,
-    }),
-    shallowEqual
-  );
-
-  // const number = useSelector((state) => state.counter.number);
-  // const diff = useSelector((state) => state.counter.diff);
-
-  const dispatch = useDispatch();
-
-  const onIncrease = () => dispatch(increase());
-  const onDecrease = () => dispatch(decrease());
-  const onSetDiff = (diff) => dispatch(setDiff(diff));
-
+const CounterContainer = ({ number, diff, increase, decrease, setDiff }) => {
   return (
     <div>
       <Counter
         number={number}
         diff={diff}
-        onIncrease={onIncrease}
-        onDecrease={onDecrease}
-        onSetDiff={onSetDiff}
+        onIncrease={increase}
+        onDecrease={decrease}
+        onSetDiff={setDiff}
       />
     </div>
   );
 };
 
-export default CounterContainer;
+const mapStateToProps = (state) => ({
+  number: state.counter.number,
+  diff: state.counter.diff,
+});
+
+// const mapDispatchToProps = (dispatch) => ({
+//   onIncrease: () => dispatch(increase()),
+//   onDecrease: () => dispatch(decrease()),
+//   onSetDiff: (diff) => dispatch(setDiff(diff)),
+// });
+
+const mapDispatchToProps = {
+  increase,
+  decrease,
+  setDiff,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
