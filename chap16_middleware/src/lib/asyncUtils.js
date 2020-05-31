@@ -1,5 +1,6 @@
 export const createPromiseThunk = (type, promiseCreator) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  console.log("createPromiseThunk");
 
   return (param) => async (dispatch) => {
     dispatch({ type });
@@ -21,7 +22,9 @@ export const createPromiseThunk = (type, promiseCreator) => {
 
 export const handleAsyncActions = (type, key) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  console.log("handleAsyncActions");
   return (state, action) => {
+    console.log(state);
     switch (action.type) {
       case type:
         return {

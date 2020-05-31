@@ -25,16 +25,20 @@ const getPostsReducer = handleAsyncActions(GET_POSTS, "posts");
 const getPostReducer = handleAsyncActions(GET_POST, "post");
 
 export default function posts(state = initialState, action) {
+  console.log(state);
   switch (action.type) {
     case GET_POSTS:
     case GET_POSTS_SUCCESS:
     case GET_POSTS_ERROR:
+      console.log(state);
       return getPostsReducer(state, action);
     case GET_POST:
     case GET_POST_SUCCESS:
     case GET_POST_ERROR:
+      console.log(state);
       return getPostReducer(state, action);
     default:
+      console.log(state);
       return state;
   }
 }
