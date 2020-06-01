@@ -1,3 +1,4 @@
+import React from "react";
 import { createStore } from "redux";
 
 const initialState = {
@@ -8,8 +9,8 @@ const initialState = {
 
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
-const CHANGE_TEXT = "CHANGE_TEXT";
-const ADD_TO_LIST = "ADD_TO_LIST";
+const CHANGE_INPUT = "CHANGE_INPUT";
+const ADD_TODO = "ADD_TODO";
 
 const increase = () => ({
   type: INCREASE,
@@ -19,13 +20,13 @@ const decrease = () => ({
   type: DECREASE,
 });
 
-const changeText = (text) => ({
-  type: CHANGE_TEXT,
+const changeInput = (text) => ({
+  type: CHANGE_INPUT,
   text,
 });
 
-const addToList = (item) => ({
-  type: ADD_TO_LIST,
+const addTodo = (item) => ({
+  type: ADD_TODO,
   item,
 });
 
@@ -41,12 +42,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         counter: state.counter - 1,
       };
-    case CHANGE_TEXT:
+    case CHANGE_INPUT:
       return {
         ...state,
         text: action.text,
       };
-    case ADD_TO_LIST:
+    case ADD_TODO:
       return {
         ...state,
         list: state.list.concat(action.item),
@@ -64,11 +65,22 @@ const listener = () => {
 };
 
 const unsubscribe = store.subscribe(listener);
-
-store.dispatch(increase());
-store.dispatch(decrease());
-store.dispatch(changeText("hi"));
-store.dispatch(addToList({ id: 1, text: "wow" }));
+// unsubscribe();
 
 window.store = store;
 window.unsubscribe = unsubscribe;
+
+store.dispatch(increase());
+store.dispatch(decrease());
+store.dispatch(changeInput("hello"));
+store.dispatch(addTodo({ id: 1, text: "good night" }));
+
+const Exercise = () => {
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
+};
+
+export default Exercise;
