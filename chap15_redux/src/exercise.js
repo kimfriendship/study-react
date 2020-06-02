@@ -76,11 +76,7 @@ store.dispatch(changeInput("hello"));
 store.dispatch(addTodo({ id: 1, text: "good night" }));
 
 const Exercise = () => {
-  return (
-    <div>
-      <div></div>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Exercise;
