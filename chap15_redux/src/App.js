@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import Exercise from "./Exercise";
+import CounterContainer from "./container/CounterContainer";
 
 function App() {
-  return <Exercise />;
+  return <CounterContainer />;
 }
 
 export default App;
