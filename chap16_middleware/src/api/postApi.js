@@ -1,4 +1,4 @@
-const sleep = (n) => new Promise((resolve) => resolve, n);
+const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
 
 const posts = [
   {
