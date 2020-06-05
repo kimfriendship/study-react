@@ -8,10 +8,11 @@ const PostListContianer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // if (data) return;
     dispatch(getPosts());
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading && !data) return <div>Loading...</div>;
   if (error) return <div>ERROR!</div>;
   if (!data) return null;
 

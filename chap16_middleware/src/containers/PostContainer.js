@@ -4,14 +4,16 @@ import { getPostById } from "../modules/posts";
 import Post from "../components/Post";
 
 const PostContainer = ({ postId }) => {
-  const { data, loading, error } = useSelector((state) => state.posts.post);
+  const { data, loading, error } = useSelector(
+    (state) => state.posts.post[postId] || {}
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPostById(postId));
   }, [postId, dispatch]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading && !data) return <div>Loading...</div>;
   if (error) return <div>ERROR!</div>;
   if (!data) return null;
 
