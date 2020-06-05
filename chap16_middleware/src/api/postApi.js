@@ -1,29 +1,11 @@
-const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
-
-const posts = [
-  {
-    id: 1,
-    title: "Hello",
-    body: "Good to see you",
-  },
-  {
-    id: 2,
-    title: "Bye",
-    body: "See you soon",
-  },
-  {
-    id: 3,
-    title: "Woojung",
-    body: "Nice to meet you",
-  },
-];
+import axios from "axios";
 
 export const getPosts = async () => {
-  await sleep(500);
-  return posts;
+  const response = await axios.get("http://localhost:4000/posts");
+  return response.data;
 };
 
 export const getPostById = async (id) => {
-  await sleep(500);
-  return posts.find((post) => post.id === id);
+  const response = await axios.get(`http://localhost:4000/posts/${id}`);
+  return response.data;
 };
