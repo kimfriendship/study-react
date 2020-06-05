@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPostById } from "../modules/posts";
+import { getPostById, goToHome } from "../modules/posts";
 import Post from "../components/Post";
 
 const PostContainer = ({ postId }) => {
@@ -17,7 +17,12 @@ const PostContainer = ({ postId }) => {
   if (error) return <div>ERROR!</div>;
   if (!data) return null;
 
-  return <Post post={data} />;
+  return (
+    <>
+      <button onClick={() => dispatch(goToHome())}>Go to Home</button>
+      <Post post={data} />
+    </>
+  );
 };
 
 export default PostContainer;
