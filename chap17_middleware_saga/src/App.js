@@ -8,8 +8,8 @@ function App() {
   return (
     <>
       <CounterContainer />
-      {/* <Route exact path="/" component={PostListPage} />
-      <Route path="/:id" component={PostPage} /> */}
+      <Route exact path="/" component={PostListPage} />
+      <Route path="/:id" component={PostPage} />
     </>
   );
 }
