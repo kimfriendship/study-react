@@ -7,6 +7,14 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "eslint-config-airbnb": "^18.1.0"
-  }
+    "eslint-config-airbnb": "^18.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  },
+  "name": "study-react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kimfriendship/study-react.git",
+  "author": "kimfriendship <kfriendship94@gmail.com>",
+  "license": "MIT"
 }

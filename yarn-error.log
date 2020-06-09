@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add react-app chap14_codesplit
+  /usr/local/bin/node /usr/local/bin/yarn add typesciprt ts-node
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/chap14_codesplit: Not found
+  Error: https://registry.yarnpkg.com/typesciprt: Not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66987:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140748:22)
       at Request.emit (events.js:198:13)
@@ -37,7 +37,13 @@ npm manifest:
     "dependencies": {
       "classnames": "^2.2.6",
       "eslint-config-airbnb": "^18.1.0"
-    }
+    },
+    "name": "study-react",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/kimfriendship/study-react.git",
+    "author": "kimfriendship <kfriendship94@gmail.com>",
+    "license": "MIT"
   }
 
 yarn manifest: 
