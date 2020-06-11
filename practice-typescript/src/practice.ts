@@ -1,36 +1,39 @@
-let count = 0;
-count += 1;
-
-const message: string = "hello world";
-const done: boolean = true;
-
-const numbers: number[] = [1, 2, 3, 4];
-const messages: string[] = ["hello", "world"];
-
-messages.push("!");
-
-let mightBeUndefined: string | undefined = undefined;
-let nullableNumber: number | null = null;
-let color: "yellow" | "green" | "red" = "green";
-color = "red";
-
-function sum(x: number, y: number): number {
-  return x + y;
+interface Shape {
+  getArea(): number;
 }
 
-const resultSum = sum(1, 2);
+class Circle implements Shape {
+  radius: number;
 
-function sumArray(numbers: number[]): number {
-  return numbers.reduce((acc, current) => acc + current, 0);
+  constructor(radius: number) {
+    this.radius = radius;
+  }
+
+  getArea() {
+    return this.radius * this.radius * Math.PI;
+  }
 }
 
-const resultSumArray = sumArray([1, 2, 3, 4, 5]);
-console.log(resultSumArray);
+class Rectangle implements Shape {
+  width: number;
+  height: number;
 
-function returnNothing(): void {
-  console.log("return nothing");
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+  }
+
+  getArea() {
+    return this.width * this.height;
+  }
 }
 
-function returnStringOrNumber(): string | number {
-  return "string or number";
+const circle: Circle = new Circle(5);
+const rectangle: Rectangle = new Rectangle(2, 5);
+const shapes: Shape[] = [circle, rectangle];
+
+function getCircleArea(circle: Circle) {
+  return circle.getArea();
 }
+
+shapes.forEach((shape) => console.log(shape.getArea()));
