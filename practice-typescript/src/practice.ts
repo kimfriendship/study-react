@@ -3,11 +3,7 @@ interface Shape {
 }
 
 class Circle implements Shape {
-  radius: number;
-
-  constructor(radius: number) {
-    this.radius = radius;
-  }
+  constructor(public radius: number) {}
 
   getArea() {
     return this.radius * this.radius * Math.PI;
@@ -15,13 +11,7 @@ class Circle implements Shape {
 }
 
 class Rectangle implements Shape {
-  width: number;
-  height: number;
-
-  constructor(width: number, height: number) {
-    this.width = width;
-    this.height = height;
-  }
+  constructor(private width: number, private height: number) {}
 
   getArea() {
     return this.width * this.height;
