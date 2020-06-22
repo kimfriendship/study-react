@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleLeft,
   faArrowAltCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { GameContext } from "../App.js";
 
 const Main = () => {
+  const context = useContext(GameContext);
+  const { state, onDecBtn, onIncBtn } = context;
+
   return (
     <>
       <div className={"players"}>
-        <FontAwesomeIcon icon={faArrowAltCircleLeft} className={"downBtn"} />
-        <h2 className={"number"}>2</h2>
-        <FontAwesomeIcon icon={faArrowAltCircleRight} className={"upBtn"} />
+        <FontAwesomeIcon
+          icon={faArrowAltCircleLeft}
+          className={"downBtn"}
+          onClick={onDecBtn}
+          color={state.players === 2 ? "lightgrey" : "orange"}
+        />
+        <span className={"number"}>{state.players}</span>
+        <FontAwesomeIcon
+          icon={faArrowAltCircleRight}
+          className={"upBtn"}
+          onClick={onIncBtn}
+          color={state.players === 10 ? "lightgrey" : "orange"}
+        />
       </div>
-      <button className={"startBtn"}>시작</button>
+      <button className={"startBtn"}>START</button>
     </>
   );
 };
