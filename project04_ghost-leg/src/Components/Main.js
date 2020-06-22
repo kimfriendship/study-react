@@ -8,7 +8,7 @@ import { GameContext } from "../App.js";
 
 const Main = () => {
   const context = useContext(GameContext);
-  const { state, onDecBtn, onIncBtn } = context;
+  const { state, onDecBtn, onIncBtn, onStartBtn } = context;
 
   return (
     <>
@@ -27,7 +27,9 @@ const Main = () => {
           color={state.players === 10 ? "lightgrey" : "orange"}
         />
       </div>
-      <button className={"startBtn"}>START</button>
+      <button className={"startBtn"} onClick={onStartBtn}>
+        START
+      </button>
     </>
   );
 };
