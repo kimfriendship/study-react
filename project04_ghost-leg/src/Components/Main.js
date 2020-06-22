@@ -8,7 +8,7 @@ import { GameContext } from "../App.js";
 
 const Main = () => {
   const context = useContext(GameContext);
-  const { state, onDecBtn, onIncBtn, onStartBtn } = context;
+  const { mainState, onDecBtn, onIncBtn, onStartBtn } = context;
 
   return (
     <>
@@ -17,14 +17,14 @@ const Main = () => {
           icon={faArrowAltCircleLeft}
           className={"downBtn"}
           onClick={onDecBtn}
-          color={state.players === 2 ? "lightgrey" : "orange"}
+          color={mainState.players === 2 ? "lightgrey" : "orange"}
         />
-        <span className={"number"}>{state.players}</span>
+        <span className={"number"}>{mainState.players}</span>
         <FontAwesomeIcon
           icon={faArrowAltCircleRight}
           className={"upBtn"}
           onClick={onIncBtn}
-          color={state.players === 10 ? "lightgrey" : "orange"}
+          color={mainState.players === 10 ? "lightgrey" : "orange"}
         />
       </div>
       <button className={"startBtn"} onClick={onStartBtn}>
