@@ -2,6 +2,7 @@
 button {
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 ul {
@@ -19,6 +20,7 @@ ul {
 
 .body {
   /* background-color: cornsilk; */
+  position: relative;
   width: 80%;
   height: 50vh;
   margin: 10vh auto;
@@ -62,7 +64,8 @@ ul {
 }
 
 /* Game */
-.profiles {
+.profiles,
+.inputContainer {
   display: flex;
   justify-content: space-around;
 }
@@ -76,4 +79,29 @@ ul {
 .profile > img {
   width: 70px;
   height: 70px;
+}
+
+.goBackBtn {
+  font-size: 15px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: lightslategray;
+}
+
+.goBackBtn:hover {
+  color: black;
+}
+
+.icon {
+  padding: 0 5px;
+}
+
+.inputs {
+  border: none;
+  background: none;
+  outline: none;
+  border-bottom: 2px solid cornflowerblue;
+  font-size: 18px;
+  width: 120px;
 }

@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { GameContext } from "../App.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Game = () => {
   const context = useContext(GameContext);
@@ -18,7 +20,15 @@ const Game = () => {
         })}
       </ul>
       <div>ladder</div>
-      <button onClick={goBackBtn}>Go Back</button>
+      <div className={"inputContainer"}>
+        {profiles.map(({ id }) => (
+          <input key={id} className={"inputs"} />
+        ))}
+      </div>
+      <button onClick={goBackBtn} className={"goBackBtn"}>
+        <FontAwesomeIcon icon={faArrowLeft} className={"icon"} />
+        Go Back
+      </button>
     </>
   );
 };
