@@ -5,11 +5,9 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Game = () => {
   const context = useContext(GameContext);
-  const { mainState, goBackBtn, changeInputs } = context;
-  const { profiles, cases } = mainState;
-
-  console.log(cases);
-  const getValue = (id) => {};
+  const { mainState, goBackBtn, getInputs } = context;
+  const { profiles, legs, players } = mainState;
+  const legsWidth = 100 / players;
 
   return (
     <>
@@ -22,10 +20,21 @@ const Game = () => {
           );
         })}
       </ul>
-      <div className={"hide"}></div>
+      {/* <div className={"hide"}></div> */}
       <div className={"ladder"}>
         {profiles.map(({ id }) => (
           <div key={id} className={"stick"} />
+        ))}
+        {legs.map(({ line, pos }) => (
+          <div
+            key={`${line}-${pos}`}
+            className={"legs"}
+            style={{
+              top: `${pos}0%`,
+              left: `${line}0%`,
+              width: `${legsWidth}%`,
+            }}
+          ></div>
         ))}
       </div>
       <div className={"inputContainer"}>
@@ -34,11 +43,11 @@ const Game = () => {
             key={id}
             className={id}
             placeholder="Enter case"
-            onChange={changeInputs}
+            onChange={getInputs}
           />
         ))}
       </div>
-      <button className={"goBtn"}>GO!</button>
+      {/* <button className={"goBtn"}>GO!</button> */}
       <button onClick={goBackBtn} className={"goBackBtn"}>
         <FontAwesomeIcon icon={faArrowLeft} className={"icon"} size={"2x"} />
         <span>Go Back</span>

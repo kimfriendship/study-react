@@ -1,7 +1,7 @@
 import React, { useReducer, createContext } from "react";
 import "./App.css";
 import Main from "./Components/Main";
-import { mainReducer, mainInitialState } from "./Reducer";
+import { mainReducer, mainInitialState, data } from "./Reducer";
 import Game from "./Components/Game";
 import Result from "./Components/Result";
 
@@ -23,65 +23,13 @@ function App() {
   const onStartBtn = () => {
     dispatch({ type: "CHANGE_PAGE", page: "game" });
     getProfiles(mainState.players);
+    getLegs();
   };
 
   const goBackBtn = () => {
     const page = mainState.page === "game" ? "main" : "game";
     dispatch({ type: "CHANGE_PAGE", page });
   };
-
-  const data = [
-    {
-      id: 1,
-      name: "coala",
-      src: "https://image.flaticon.com/icons/svg/3069/3069172.svg",
-    },
-    {
-      id: 2,
-      name: "bird",
-      src: "https://image.flaticon.com/icons/svg/3069/3069186.svg",
-    },
-    {
-      id: 3,
-      name: "penguin",
-      src: "https://image.flaticon.com/icons/svg/3069/3069217.svg",
-    },
-    {
-      id: 4,
-      name: "frog",
-      src: "https://image.flaticon.com/icons/svg/3069/3069170.svg",
-    },
-    {
-      id: 5,
-      name: "dog",
-      src: "https://image.flaticon.com/icons/svg/3069/3069267.svg",
-    },
-    {
-      id: 6,
-      name: "giraffe",
-      src: "https://image.flaticon.com/icons/svg/3069/3069201.svg",
-    },
-    {
-      id: 7,
-      name: "crocodile",
-      src: "https://image.flaticon.com/icons/svg/3069/3069234.svg",
-    },
-    {
-      id: 8,
-      name: "horse",
-      src: "https://image.flaticon.com/icons/svg/3069/3069284.svg",
-    },
-    {
-      id: 9,
-      name: "fox",
-      src: "https://image.flaticon.com/icons/svg/3069/3069166.svg",
-    },
-    {
-      id: 10,
-      name: "elephant",
-      src: "https://image.flaticon.com/icons/svg/3069/3069224.svg",
-    },
-  ];
 
   const getRandom = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -105,11 +53,31 @@ function App() {
     });
   };
 
-  const changeInputs = ({ target }) => {
-    console.log(target.className);
+  const getInputs = ({ target }) => {
     const id = target.className;
     const value = target.value;
-    dispatch({ type: "CHANGE_INPUTS", id, value });
+    dispatch({ type: "GET_INPUTS", id, value });
+  };
+
+  const getLegs = () => {
+    let legs = [];
+
+    for (let i = 1; i < mainState.players; i++) {
+      const count = getRandom(1, 5);
+
+      for (let j = 1; j <= count; j++) {
+        const p = getRandom(1, 7);
+        const again = legs.filter(({ line, pos }) => line === i && pos === p);
+
+        if (again.length) {
+          j--;
+        } else {
+          legs = legs.concat({ line: i, pos: p });
+        }
+      }
+    }
+
+    dispatch({ type: "GET_LEGS", legs });
   };
 
   const value = {
@@ -118,7 +86,7 @@ function App() {
     onDecBtn,
     onStartBtn,
     goBackBtn,
-    changeInputs,
+    getInputs,
   };
 
   return (
