@@ -2,6 +2,7 @@ export const mainInitialState = {
   page: "main",
   players: 2,
   profiles: [],
+  cases: {},
 };
 
 export const mainReducer = (mainState, action) => {
@@ -25,6 +26,14 @@ export const mainReducer = (mainState, action) => {
       return {
         ...mainState,
         profiles: action.profiles,
+      };
+    case "CHANGE_INPUTS":
+      return {
+        ...mainState,
+        cases: {
+          ...mainState.cases,
+          [action.id]: action.value,
+        },
       };
     default:
       throw new Error("ERROR");

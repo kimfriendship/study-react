@@ -5,8 +5,11 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Game = () => {
   const context = useContext(GameContext);
-  const { mainState, goBackBtn } = context;
-  const { profiles } = mainState;
+  const { mainState, goBackBtn, changeInputs } = context;
+  const { profiles, cases } = mainState;
+
+  console.log(cases);
+  const getValue = (id) => {};
 
   return (
     <>
@@ -19,15 +22,26 @@ const Game = () => {
           );
         })}
       </ul>
-      <div>ladder</div>
-      <div className={"inputContainer"}>
+      <div className={"hide"}></div>
+      <div className={"ladder"}>
         {profiles.map(({ id }) => (
-          <input key={id} className={"inputs"} />
+          <div key={id} className={"stick"} />
         ))}
       </div>
+      <div className={"inputContainer"}>
+        {profiles.map(({ id }) => (
+          <input
+            key={id}
+            className={id}
+            placeholder="Enter case"
+            onChange={changeInputs}
+          />
+        ))}
+      </div>
+      <button className={"goBtn"}>GO!</button>
       <button onClick={goBackBtn} className={"goBackBtn"}>
-        <FontAwesomeIcon icon={faArrowLeft} className={"icon"} />
-        Go Back
+        <FontAwesomeIcon icon={faArrowLeft} className={"icon"} size={"2x"} />
+        <span>Go Back</span>
       </button>
     </>
   );

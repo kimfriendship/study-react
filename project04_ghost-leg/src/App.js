@@ -105,7 +105,21 @@ function App() {
     });
   };
 
-  const value = { mainState, onIncBtn, onDecBtn, onStartBtn, goBackBtn };
+  const changeInputs = ({ target }) => {
+    console.log(target.className);
+    const id = target.className;
+    const value = target.value;
+    dispatch({ type: "CHANGE_INPUTS", id, value });
+  };
+
+  const value = {
+    mainState,
+    onIncBtn,
+    onDecBtn,
+    onStartBtn,
+    goBackBtn,
+    changeInputs,
+  };
 
   return (
     <>
