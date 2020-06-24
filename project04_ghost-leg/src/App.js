@@ -1,9 +1,9 @@
 import React, { useReducer, createContext } from "react";
 import "./App.css";
-import Main from "./Components/Main";
+import Main from "./Pages/Main";
 import { mainReducer, mainInitialState, data } from "./Reducer";
-import Game from "./Components/Game";
-import Result from "./Components/Result";
+import Game from "./Pages/Game";
+import Result from "./Pages/Result";
 
 export const GameContext = createContext({});
 
@@ -71,7 +71,6 @@ function App() {
           ({ line, pos }) => (line === i || line === i - 1) && pos === p
         );
 
-        console.log(again);
         if (again.length) {
           j--;
         } else {
@@ -85,6 +84,7 @@ function App() {
 
   const value = {
     mainState,
+    dispatch,
     onIncBtn,
     onDecBtn,
     onStartBtn,

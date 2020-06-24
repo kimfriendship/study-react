@@ -25,7 +25,7 @@ const Canvas = () => {
       ctx.closePath();
 
       for (let r = 0; r < rows.length; r++) {
-        let stickY = rows[r].pos * 17;
+        let stickY = rows[r].pos * 15;
 
         ctx.beginPath();
         ctx.rect(stickX - diffX, stickY, diffX, 1);
@@ -43,6 +43,7 @@ const Canvas = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     ctx = canvas.getContext("2d");
     drawLadders();
+    console.log(legs);
   }, []);
 
   return <canvas className={"canvas"} ref={canvasRef}></canvas>;
