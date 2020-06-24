@@ -38,11 +38,11 @@ const Game = () => {
         ))}
       </div>
       <div className={"inputContainer"}>
-        {profiles.map(({ id }) => (
+        {profiles.map(({ id }, i) => (
           <input
             key={id}
             className={id}
-            placeholder="Enter case"
+            placeholder={`case${i + 1}`}
             onChange={getInputs}
           />
         ))}

@@ -49,13 +49,13 @@ export const mainReducer = (mainState, action) => {
 export const data = [
   {
     id: 1,
-    name: "coala",
-    src: "https://image.flaticon.com/icons/svg/3069/3069172.svg",
+    name: "rabbit",
+    src: "https://image.flaticon.com/icons/svg/3069/3069187.svg",
   },
   {
     id: 2,
-    name: "bird",
-    src: "https://image.flaticon.com/icons/svg/3069/3069186.svg",
+    name: "pig",
+    src: "https://image.flaticon.com/icons/svg/3069/3069273.svg",
   },
   {
     id: 3,
@@ -64,8 +64,8 @@ export const data = [
   },
   {
     id: 4,
-    name: "frog",
-    src: "https://image.flaticon.com/icons/svg/3069/3069170.svg",
+    name: "cameleon",
+    src: "https://image.flaticon.com/icons/svg/3069/3069230.svg",
   },
   {
     id: 5,
@@ -79,8 +79,8 @@ export const data = [
   },
   {
     id: 7,
-    name: "crocodile",
-    src: "https://image.flaticon.com/icons/svg/3069/3069234.svg",
+    name: "dolphin",
+    src: "https://image.flaticon.com/icons/svg/3069/3069269.svg",
   },
   {
     id: 8,
