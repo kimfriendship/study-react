@@ -63,12 +63,15 @@ function App() {
     let legs = [];
 
     for (let i = 1; i < mainState.players; i++) {
-      const count = getRandom(1, 5);
+      const count = getRandom(1, 4);
 
       for (let j = 1; j <= count; j++) {
-        const p = getRandom(1, 7);
-        const again = legs.filter(({ line, pos }) => line === i && pos === p);
+        const p = getRandom(1, 9);
+        const again = legs.filter(
+          ({ line, pos }) => (line === i || line === i - 1) && pos === p
+        );
 
+        console.log(again);
         if (again.length) {
           j--;
         } else {
@@ -87,6 +90,7 @@ function App() {
     onStartBtn,
     goBackBtn,
     getInputs,
+    getRandom,
   };
 
   return (

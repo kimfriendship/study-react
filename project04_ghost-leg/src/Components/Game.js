@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { GameContext } from "../App.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Canvas from "./Canvas.js";
 
 const Game = () => {
   const context = useContext(GameContext);
   const { mainState, goBackBtn, getInputs } = context;
-  const { profiles, legs, players } = mainState;
-  const legsWidth = 100 / players;
+  const { profiles } = mainState;
 
   return (
     <>
@@ -21,22 +21,7 @@ const Game = () => {
         })}
       </ul>
       {/* <div className={"hide"}></div> */}
-      <div className={"ladder"}>
-        {profiles.map(({ id }) => (
-          <div key={id} className={"stick"} />
-        ))}
-        {legs.map(({ line, pos }) => (
-          <div
-            key={`${line}-${pos}`}
-            className={"legs"}
-            style={{
-              top: `${pos}0%`,
-              left: `${line}0%`,
-              width: `${legsWidth}%`,
-            }}
-          ></div>
-        ))}
-      </div>
+      <Canvas />
       <div className={"inputContainer"}>
         {profiles.map(({ id }, i) => (
           <input
