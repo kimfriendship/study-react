@@ -4,7 +4,7 @@ import { GameContext } from "../App.js";
 const Canvas = () => {
   const context = useContext(GameContext);
   const { mainState } = context;
-  const { players, legs } = mainState;
+  const { players, legs, profiles, ladder } = mainState;
   const canvasRef = React.useRef(null);
   let canvas = null;
   let ctx = null;
@@ -37,13 +37,31 @@ const Canvas = () => {
     }
   };
 
+  const drawBalls = () => {
+    let ballX = canvas.width / (players * 2);
+    let diffX = ballX * 2;
+
+    for (let p = 0; p < players; p++) {
+      ctx.beginPath();
+      ctx.arc(ballX + 1, 3, 2, 0, Math.PI * 2);
+      ctx.fillStyle = profiles[p].color;
+      ctx.fill();
+      ctx.strokeStyle = "black";
+      ctx.stroke();
+      ctx.closePath();
+      ballX += diffX;
+    }
+  };
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     canvas = canvasRef.current;
     // eslint-disable-next-line react-hooks/exhaustive-deps
     ctx = canvas.getContext("2d");
     drawLadders();
+    drawBalls();
     console.log(legs);
+    console.log(ladder);
   }, []);
 
   return <canvas className={"canvas"} ref={canvasRef}></canvas>;

@@ -3,6 +3,7 @@ export const mainInitialState = {
   players: 2,
   profiles: [],
   legs: [],
+  ladder: [],
   cases: {},
 };
 
@@ -41,6 +42,11 @@ export const mainReducer = (mainState, action) => {
         ...mainState,
         legs: action.legs,
       };
+    case "GET_LADDER":
+      return {
+        ...mainState,
+        ladder: action.ladder,
+      };
     default:
       throw new Error("ERROR");
   }
@@ -63,7 +69,7 @@ export const data = [
     id: 3,
     name: "penguin",
     src: "https://image.flaticon.com/icons/svg/3069/3069217.svg",
-    color: "grey",
+    color: "black",
   },
   {
     id: 4,
@@ -75,31 +81,31 @@ export const data = [
     id: 5,
     name: "dog",
     src: "https://image.flaticon.com/icons/svg/3069/3069267.svg",
-    color: "cornsilk",
+    color: "yellow",
   },
   {
     id: 6,
     name: "giraffe",
     src: "https://image.flaticon.com/icons/svg/3069/3069201.svg",
-    color: "lemonchiffon",
+    color: "burlywood",
   },
   {
     id: 7,
     name: "dolphin",
     src: "https://image.flaticon.com/icons/svg/3069/3069269.svg",
-    color: "lightblue",
+    color: "skyblue",
   },
   {
     id: 8,
     name: "horse",
     src: "https://image.flaticon.com/icons/svg/3069/3069284.svg",
-    color: "burlywood",
+    color: "maroon",
   },
   {
     id: 9,
     name: "fox",
     src: "https://image.flaticon.com/icons/svg/3069/3069166.svg",
-    color: "lightsalmon",
+    color: "tomato",
   },
   {
     id: 10,

@@ -9,26 +9,27 @@ export const GameContext = createContext({});
 
 function App() {
   const [mainState, dispatch] = useReducer(mainReducer, mainInitialState);
+  const { players, page } = mainState;
 
   const onIncBtn = () => {
-    if (mainState.players >= 10) return;
+    if (players >= 10) return;
     dispatch({ type: "INC_PLAYERS" });
   };
 
   const onDecBtn = () => {
-    if (mainState.players <= 2) return;
+    if (players <= 2) return;
     dispatch({ type: "DEC_PLAYERS" });
   };
 
   const onStartBtn = () => {
     dispatch({ type: "CHANGE_PAGE", page: "game" });
-    getProfiles(mainState.players);
+    getProfiles(players);
     getLegs();
   };
 
   const goBackBtn = () => {
-    const page = mainState.page === "game" ? "main" : "game";
-    dispatch({ type: "CHANGE_PAGE", page });
+    const p = page === "game" ? "main" : "game";
+    dispatch({ type: "CHANGE_PAGE", page: p });
   };
 
   const getRandom = (min, max) => {
@@ -62,7 +63,7 @@ function App() {
   const getLegs = () => {
     let legs = [];
 
-    for (let i = 1; i < mainState.players; i++) {
+    for (let i = 1; i < players; i++) {
       const count = getRandom(1, 4);
 
       for (let j = 1; j <= count; j++) {
@@ -80,6 +81,25 @@ function App() {
     }
 
     dispatch({ type: "GET_LEGS", legs });
+    getLadder(legs);
+  };
+
+  const getLadder = (legs) => {
+    let ladder = [];
+
+    for (let i = 1; i < players; i++) {
+      const isLine = legs.filter(({ line }) => line === i);
+      let array = [];
+
+      for (let j = 1; j <= 9; j++) {
+        const isLeg = isLine.filter(({ pos }) => pos === j).length;
+        array = isLeg ? array.concat(1) : array.concat(0);
+      }
+
+      ladder = ladder.concat([array]);
+    }
+
+    dispatch({ type: "GET_LADDER", ladder });
   };
 
   const value = {
@@ -91,6 +111,7 @@ function App() {
     goBackBtn,
     getInputs,
     getRandom,
+    getLadder,
   };
 
   return (
