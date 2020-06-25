@@ -8,6 +8,11 @@ const Canvas = () => {
   const canvasRef = React.useRef(null);
   let canvas = null;
   let ctx = null;
+  let legGap = 15;
+  let ballX = 0;
+  let ballY = 2;
+  let LR = 0;
+  let LC = 0;
 
   const drawLadders = () => {
     const width = canvas.width;
@@ -25,7 +30,7 @@ const Canvas = () => {
       ctx.closePath();
 
       for (let r = 0; r < rows.length; r++) {
-        let stickY = rows[r].pos * 15;
+        let stickY = rows[r].pos * legGap;
 
         ctx.beginPath();
         ctx.rect(stickX - diffX, stickY, diffX, 1);
@@ -37,20 +42,41 @@ const Canvas = () => {
     }
   };
 
-  const drawBalls = () => {
-    let ballX = canvas.width / (players * 2);
+  // const drawBalls = (diffX) => {};
+
+  const drawLines = () => {
+    if (ballY === canvas.height - 1) clearInterval(startDrawing);
+    if (ballY === canvas.height - 1) return;
+    ballX = canvas.width / (players * 2);
+    const checkLegs = ballY % legGap === 0;
     let diffX = ballX * 2;
+    let move = 0.5;
 
     for (let p = 0; p < players; p++) {
       ctx.beginPath();
-      ctx.arc(ballX + 1, 3, 2, 0, Math.PI * 2);
+      ctx.arc(ballX + diffX * p + 1, ballY, 2, 0, Math.PI * 2);
       ctx.fillStyle = profiles[p].color;
       ctx.fill();
-      ctx.strokeStyle = "black";
-      ctx.stroke();
       ctx.closePath();
-      ballX += diffX;
+
+      if (checkLegs) {
+        LC = p;
+        let turn = "straight";
+
+        if (LR <= 8) {
+          turn = ladder[LR][LC - 1] === 1 ? "right" : turn;
+          turn = ladder[LR][LC] === 1 ? "left" : turn;
+          console.log(LR, LC, turn);
+        }
+
+        if (turn === "right") ballX += move;
+        if (turn === "left") ballX -= move;
+        if (turn === "straight") ballY += move;
+      }
     }
+
+    if (checkLegs) LR++;
+    if (!checkLegs) ballY += move;
   };
 
   useEffect(() => {
@@ -59,10 +85,11 @@ const Canvas = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     ctx = canvas.getContext("2d");
     drawLadders();
-    drawBalls();
-    console.log(legs);
+    console.log(profiles);
     console.log(ladder);
   }, []);
+
+  const startDrawing = setInterval(drawLines, 10);
 
   return <canvas className={"canvas"} ref={canvasRef}></canvas>;
 };

@@ -57,7 +57,7 @@ export const data = [
     id: 1,
     name: "rabbit",
     src: "https://image.flaticon.com/icons/svg/3069/3069187.svg",
-    color: "white",
+    color: "lightgray",
   },
   {
     id: 2,
@@ -81,7 +81,7 @@ export const data = [
     id: 5,
     name: "dog",
     src: "https://image.flaticon.com/icons/svg/3069/3069267.svg",
-    color: "yellow",
+    color: "sandybrown",
   },
   {
     id: 6,
@@ -111,6 +111,6 @@ export const data = [
     id: 10,
     name: "elephant",
     src: "https://image.flaticon.com/icons/svg/3069/3069224.svg",
-    color: "lightslategrey",
+    color: "lightsteelblue",
   },
 ];

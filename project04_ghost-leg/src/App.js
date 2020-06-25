@@ -87,11 +87,11 @@ function App() {
   const getLadder = (legs) => {
     let ladder = [];
 
-    for (let i = 1; i < players; i++) {
-      const isLine = legs.filter(({ line }) => line === i);
+    for (let j = 1; j <= 9; j++) {
       let array = [];
 
-      for (let j = 1; j <= 9; j++) {
+      for (let i = 1; i < players; i++) {
+        const isLine = legs.filter(({ line }) => line === i);
         const isLeg = isLine.filter(({ pos }) => pos === j).length;
         array = isLeg ? array.concat(1) : array.concat(0);
       }
