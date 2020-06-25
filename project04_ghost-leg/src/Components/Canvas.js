@@ -56,16 +56,31 @@ const Canvas = () => {
 
   const crossLegs = (move, ballX) => {
     isCrossing = true;
+    const rightGap = (canvas.width / (players * 2)) * 3;
+    const leftGap = canvas.width / (players * 2) + rightGap * 0;
 
-    for (let i = 0; ballX <= (canvas.width / (players * 2)) * 3; i++) {
-      ballX += move;
-      ctx.beginPath();
-      ctx.arc(ballX, ballY, 2, 0, Math.PI * 2);
-      ctx.fillStyle = profiles[0].color;
-      ctx.fill();
-      ctx.closePath();
+    if (move > 0) {
+      for (let i = 0; ballX < rightGap; i++) {
+        ballX += move;
+        ctx.beginPath();
+        ctx.arc(ballX + 1, ballY, 0.2, 0, Math.PI * 2);
+        ctx.fillStyle = profiles[0].color;
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+    if (move < 0) {
+      for (let i = 0; ballX > leftGap; i++) {
+        ballX += move;
+        ctx.beginPath();
+        ctx.arc(ballX + 1, ballY, 0.2, 0, Math.PI * 2);
+        ctx.fillStyle = profiles[0].color;
+        ctx.fill();
+        ctx.closePath();
+      }
     }
 
+    ballY += +move;
     return ballX;
   };
 
@@ -83,12 +98,11 @@ const Canvas = () => {
     // for (let p = 0; p < players; p++) {
 
     if (checkLegs) {
-      LC = 0;
-
       if (LR <= 8) {
         right = ladder[LR][LC] === 1;
         left = ladder[LR][LC - 1] === 1;
         straight = right || left ? false : true;
+        console.log(LR, LC, right, left);
       }
 
       if (straight) {
@@ -97,14 +111,15 @@ const Canvas = () => {
       }
 
       if (right) {
-        ballX = crossLegs(move, ballX);
+        console.log("right", ballX);
+        ballX = crossLegs(0.5, ballX);
         isCrossing = false;
         LC += 1;
       }
 
       if (left) {
-        console.log("left is", left);
-        ballX = crossLegs(-move, ballX);
+        console.log("left", ballX);
+        ballX = crossLegs(-0.5, ballX);
         isCrossing = false;
         LC -= 1;
       }
@@ -146,7 +161,7 @@ const Canvas = () => {
 
     if (checkLegs) LR++;
     if (!checkLegs && straight) ballY += move;
-    console.log(ballY, "straight", straight, "right", right, "left", left);
+    // console.log(ballY, "straight", straight, "right", right, "left", left);
   };
 
   const matchResults = () => {
@@ -161,7 +176,7 @@ const Canvas = () => {
     drawLadders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     ballX = canvas.width / (players * 2);
-    startDrawing = setInterval(drawLines, 10);
+    startDrawing = setInterval(drawLines, 5);
     console.log(ladder);
   }, []);
 
