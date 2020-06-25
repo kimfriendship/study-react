@@ -47,6 +47,15 @@ export const mainReducer = (mainState, action) => {
         ...mainState,
         ladder: action.ladder,
       };
+    case "GET_RESULTS":
+      return {
+        ...mainState,
+        profiles: mainState.profiles.map((p, i) => {
+          return i === action.index
+            ? { ...p, result: p.result + action.result }
+            : p;
+        }),
+      };
     default:
       throw new Error("ERROR");
   }
@@ -58,59 +67,69 @@ export const data = [
     name: "rabbit",
     src: "https://image.flaticon.com/icons/svg/3069/3069187.svg",
     color: "lightgray",
+    result: 0,
   },
   {
     id: 2,
     name: "pig",
     src: "https://image.flaticon.com/icons/svg/3069/3069273.svg",
     color: "lightpink",
+    result: 0,
   },
   {
     id: 3,
     name: "penguin",
     src: "https://image.flaticon.com/icons/svg/3069/3069217.svg",
     color: "black",
+    result: 0,
   },
   {
     id: 4,
     name: "cameleon",
     src: "https://image.flaticon.com/icons/svg/3069/3069230.svg",
-    color: "lightgreen",
+    color: "lightseagreen",
+    result: 0,
   },
   {
     id: 5,
     name: "dog",
     src: "https://image.flaticon.com/icons/svg/3069/3069267.svg",
     color: "sandybrown",
+    result: 0,
   },
   {
     id: 6,
     name: "giraffe",
     src: "https://image.flaticon.com/icons/svg/3069/3069201.svg",
     color: "burlywood",
+    result: 0,
   },
   {
     id: 7,
     name: "dolphin",
     src: "https://image.flaticon.com/icons/svg/3069/3069269.svg",
     color: "skyblue",
+    result: 0,
   },
   {
     id: 8,
     name: "horse",
     src: "https://image.flaticon.com/icons/svg/3069/3069284.svg",
     color: "maroon",
+    result: 0,
   },
   {
     id: 9,
     name: "fox",
     src: "https://image.flaticon.com/icons/svg/3069/3069166.svg",
     color: "tomato",
+    result: 0,
   },
   {
     id: 10,
     name: "elephant",
     src: "https://image.flaticon.com/icons/svg/3069/3069224.svg",
     color: "lightsteelblue",
+    result: 0,
   },
 ];
