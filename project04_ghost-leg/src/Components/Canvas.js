@@ -56,8 +56,9 @@ const Canvas = () => {
 
   const crossLegs = (move, ballX) => {
     isCrossing = true;
-    const rightGap = (canvas.width / (players * 2)) * 3;
-    const leftGap = canvas.width / (players * 2) + rightGap * 0;
+    const stickGap = canvas.width / (players * 2);
+    const rightGap = stickGap * (LC ? 2 * LC + 3 : 3);
+    const leftGap = stickGap * (LC === 1 ? LC : LC + 1);
 
     if (move > 0) {
       for (let i = 0; ballX < rightGap; i++) {
@@ -80,7 +81,7 @@ const Canvas = () => {
       }
     }
 
-    ballY += +move;
+    ballY += 0.5;
     return ballX;
   };
 
@@ -126,37 +127,6 @@ const Canvas = () => {
     } else {
       drawBalls(ballX, diffX, ballY);
     }
-    // }
-    // for (let p = 0; p < players; p++) {
-    //   ctx.beginPath();
-    //   ctx.arc(ballX + diffX * p + 1, ballY, 2, 0, Math.PI * 2);
-    //   ctx.fillStyle = profiles[p].color;
-    //   ctx.fill();
-    //   ctx.closePath();
-
-    //   if (checkLegs) {
-    //     LC = p;
-    //     let turn = "straight";
-
-    //     if (LR <= 8) {
-    //       turn = ladder[LR][LC] === 1 ? "right" : turn;
-    //       turn = ladder[LR][LC - 1] === 1 ? "left" : turn;
-    //       console.log(LR, LC, turn);
-    //     }
-
-    //     if (turn === "right") {
-    //       ballX += diffX;
-    //       resultArray[p] += 1;
-    //     }
-    //     if (turn === "left") {
-    //       ballX -= diffX;
-    //       resultArray[p] -= 1;
-    //     }
-    //     if (turn === "straight") {
-    //       ballY += move;
-    //     }
-    //     console.log(ballX);
-    //   }
     // }
 
     if (checkLegs) LR++;
