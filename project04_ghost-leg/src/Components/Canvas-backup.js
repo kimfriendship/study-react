@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { GameContext } from "../App.js";
-import Paths from "./Paths.js";
 
 const Canvas = () => {
   const context = useContext(GameContext);
-  const { mainState } = context;
+  const { mainState, dispatch } = context;
   const { players, legs, profiles, ladder } = mainState;
 
   const canvasRef = React.useRef(null);
@@ -161,12 +160,7 @@ const Canvas = () => {
     console.log(ladder);
   }, []);
 
-  return (
-    <>
-      <canvas className={"canvas"} ref={canvasRef}></canvas>
-      <Paths />
-    </>
-  );
+  return <canvas className={"canvas"} ref={canvasRef}></canvas>;
 };
 
 export default Canvas;
