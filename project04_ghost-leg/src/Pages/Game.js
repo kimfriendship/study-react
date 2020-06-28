@@ -32,13 +32,13 @@ const Game = () => {
       ) : null}
       {game === "end" ? (
         <button className={"resultsBtn"} onClick={seeResultsBtn}>
-          <span>See All Results</span>
+          <span>전체 결과 보기</span>
           <FontAwesomeIcon icon={faArrowRight} className={"icon"} size={"2x"} />
         </button>
       ) : null}
       <button onClick={goBackBtn} className={"goBackBtn"}>
+        <span>뒤로 가기</span>
         <FontAwesomeIcon icon={faArrowLeft} className={"icon"} size={"2x"} />
-        <span>Go Back</span>
       </button>
     </>
   );

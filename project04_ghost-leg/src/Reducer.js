@@ -6,6 +6,7 @@ export const mainInitialState = {
   legs: [],
   ladder: [],
   cases: {},
+  results: [],
 };
 
 export const mainReducer = (mainState, action) => {
@@ -34,7 +35,15 @@ export const mainReducer = (mainState, action) => {
       return {
         ...mainState,
         game: action.game,
+        profiles: mainState.profiles.map((p) => ({ ...p, result: 0 })),
         cases: {},
+      };
+    case "NEW_GAME":
+      return {
+        ...mainState,
+        game: action.game,
+        profiles: mainState.profiles.map((p) => ({ ...p, result: 0 })),
+        page: "main",
       };
     case "GET_PROFILES":
       return {
@@ -60,12 +69,17 @@ export const mainReducer = (mainState, action) => {
         ladder: action.ladder,
       };
     case "GET_RESULTS":
+      // return {
+      //   ...mainState,
+      //   game: "end",
+      //   profiles: mainState.profiles.map((p, i) => {
+      //     return { ...p, result: action.results[i] };
+      //   }),
+      // };
       return {
         ...mainState,
         game: "end",
-        profiles: mainState.profiles.map((p, i) => {
-          return i === action.index ? { ...p, result: action.result } : p;
-        }),
+        results: action.results,
       };
     default:
       throw new Error("ERROR");

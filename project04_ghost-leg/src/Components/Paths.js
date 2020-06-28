@@ -6,6 +6,7 @@ const Paths = ({ canvasRef, profile }) => {
   const context = useContext(GameContext);
   const { mainState, dispatch } = context;
   const { players, profiles, ladder, game } = mainState;
+  const resultsArray = new Array(players).fill(0);
 
   let startDrawing = null;
   let canvas = null;
@@ -66,9 +67,14 @@ const Paths = ({ canvasRef, profile }) => {
   const drawLines = (p) => {
     if (isCrossing) return;
     if (ballY === canvas.height + 10) {
+      console.log("before", resultsArray);
       clearInterval(startDrawing);
-      dispatch({ type: "GET_RESULTS", index: profile, result: ballX });
-      // console.log(game, ballX, profiles[p]);
+      dispatch({
+        type: "GET_RESULTS",
+        results: resultsArray,
+      });
+      console.log(profiles[p].name, profiles[p].result);
+      console.log("after dipatch", resultsArray);
     }
 
     const checkLegs = ballY % legGap === 0;
@@ -109,6 +115,7 @@ const Paths = ({ canvasRef, profile }) => {
 
     if (checkLegs) LR++;
     if (!checkLegs && straight) ballY += move;
+    resultsArray[p] = LC;
   };
 
   useEffect(() => {

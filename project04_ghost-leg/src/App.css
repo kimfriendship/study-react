@@ -93,10 +93,9 @@ ul {
   font-size: 25px;
   font-weight: 700;
   position: absolute;
-  top: calc(50% - 100px);
+  top: 27vh;
   left: calc(50% - 50px);
   width: 100px;
-  height: 80px;
   color: lightgray;
   transition: 0.5s;
 }
@@ -185,4 +184,9 @@ input,
 .canvas {
   width: 100%;
   height: 40vh;
+}
+
+/* Results */
+.resultsTitle {
+  text-align: center;
 }

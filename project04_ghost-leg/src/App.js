@@ -12,6 +12,7 @@ function App() {
   const { players, page } = mainState;
 
   const resetGame = () => dispatch({ type: "RESET_GAME", game: "start" });
+  const newGame = () => dispatch({ type: "NEW_GAME", game: "start" });
   const startGame = () => {
     dispatch({ type: "START_GAME", game: "ing" });
   };
@@ -123,6 +124,7 @@ function App() {
     getRandom,
     getLadder,
     startGame,
+    newGame,
     resetGame,
     seeResultsBtn,
   };
