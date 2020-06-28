@@ -102,6 +102,8 @@ function App() {
     dispatch({ type: "GET_LADDER", ladder });
   };
 
+  const startGame = () => dispatch({ type: "START_GAME", game: "ing" });
+
   const value = {
     mainState,
     dispatch,
@@ -112,6 +114,7 @@ function App() {
     getInputs,
     getRandom,
     getLadder,
+    startGame,
   };
 
   return (

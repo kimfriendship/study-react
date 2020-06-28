@@ -31,7 +31,7 @@ const Canvas = () => {
         let stickY = rows[r].pos * legGap;
 
         ctx.beginPath();
-        ctx.rect(stickX - stickDiffX, stickY, stickDiffX, 1);
+        ctx.rect(stickX - stickDiffX, stickY, stickDiffX, 2);
         ctx.fillStyle = "black";
         ctx.fill();
         ctx.closePath();

@@ -1,5 +1,6 @@
 export const mainInitialState = {
   page: "main",
+  game: "start",
   players: 2,
   profiles: [],
   legs: [],
@@ -12,17 +13,22 @@ export const mainReducer = (mainState, action) => {
     case "INC_PLAYERS":
       return {
         ...mainState,
-        players: +mainState.players + 1,
+        players: mainState.players + 1,
       };
     case "DEC_PLAYERS":
       return {
         ...mainState,
-        players: +mainState.players - 1,
+        players: mainState.players - 1,
       };
     case "CHANGE_PAGE":
       return {
         ...mainState,
         page: action.page,
+      };
+    case "START_GAME":
+      return {
+        ...mainState,
+        game: action.game,
       };
     case "GET_PROFILES":
       return {
@@ -51,9 +57,7 @@ export const mainReducer = (mainState, action) => {
       return {
         ...mainState,
         profiles: mainState.profiles.map((p, i) => {
-          return i === action.index
-            ? { ...p, result: p.result + action.result }
-            : p;
+          return i === action.index ? { ...p, result: action.result } : p;
         }),
       };
     default:
@@ -80,7 +84,7 @@ export const data = [
     id: 3,
     name: "penguin",
     src: "https://image.flaticon.com/icons/svg/3069/3069217.svg",
-    color: "black",
+    color: "darkslategray",
     result: 0,
   },
   {

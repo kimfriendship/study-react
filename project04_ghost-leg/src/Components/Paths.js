@@ -4,7 +4,7 @@ import { GameContext } from "../App.js";
 
 const Paths = ({ canvasRef, profile }) => {
   const context = useContext(GameContext);
-  const { mainState } = context;
+  const { mainState, dispatch } = context;
   const { players, profiles, ladder } = mainState;
 
   let canvas = null;
@@ -31,40 +31,44 @@ const Paths = ({ canvasRef, profile }) => {
     const rightGap = firstX * (LC ? 2 * LC + 3 : 3);
     const leftGap = firstX * (LC === 1 ? LC : 2 * LC - 1);
 
-    console.log("ballX", ballX);
-    console.log("gaps", firstX, rightGap, leftGap);
+    // console.log("ballX", ballX);
+    // console.log("gaps", firstX, rightGap, leftGap);
 
     if (move > 0) {
       for (let i = 0; ballX < rightGap; i++) {
         console.log(profile, "drawing right leg");
         ballX += move;
         ctx.beginPath();
-        ctx.arc(ballX + 1, ballY, 0.1, 0, Math.PI * 2);
+        ctx.arc(ballX + 1, ballY, 0.3, 0, Math.PI * 2);
         ctx.fillStyle = profiles[p].color;
         ctx.fill();
         ctx.closePath();
       }
     }
     if (move < 0) {
-      console.log("condition", ballX, leftGap);
+      // console.log("condition", ballX, leftGap);
       for (let i = 0; ballX > leftGap; i++) {
         console.log(profile, "drawing left leg");
         ballX += move;
         ctx.beginPath();
-        ctx.arc(ballX + 1, ballY, 0.1, 0, Math.PI * 2);
+        ctx.arc(ballX + 1, ballY, 0.3, 0, Math.PI * 2);
         ctx.fillStyle = profiles[p].color;
         ctx.fill();
         ctx.closePath();
       }
     }
 
-    console.log("cross", move);
     ballY += 1;
     return ballX;
   };
 
   const drawLines = (p) => {
-    if (ballY === canvas.height || isCrossing) return;
+    if (isCrossing || ballY === canvas.height) return;
+    if (ballY === canvas.height) {
+      // dispatch({ type: "GET_RESULTS", index: p, result: ballX });
+      console.log(profiles);
+      return;
+    }
 
     const checkLegs = ballY % legGap === 0;
     let move = 0.5;
@@ -86,14 +90,14 @@ const Paths = ({ canvasRef, profile }) => {
       }
 
       if (right) {
-        console.log(profile, "right", ballX);
+        // console.log(profile, "right", ballX);
         ballX = crossLegs(p, 0.5, ballX, ballY);
         isCrossing = false;
         LC += 1;
       }
 
       if (left) {
-        console.log(profile, "left", ballX);
+        // console.log(profile, "left", ballX);
         ballX = crossLegs(p, -0.5, ballX, ballY);
         isCrossing = false;
         LC -= 1;
@@ -118,7 +122,7 @@ const Paths = ({ canvasRef, profile }) => {
     return () => clearInterval(startDrawing);
   });
 
-  return <canvas></canvas>;
+  return <canvas width={1} height={1}></canvas>;
 };
 
 export default Paths;
