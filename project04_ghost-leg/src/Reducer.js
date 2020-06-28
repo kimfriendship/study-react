@@ -34,6 +34,7 @@ export const mainReducer = (mainState, action) => {
       return {
         ...mainState,
         game: action.game,
+        cases: {},
       };
     case "GET_PROFILES":
       return {

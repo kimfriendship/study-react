@@ -11,9 +11,11 @@ function App() {
   const [mainState, dispatch] = useReducer(mainReducer, mainInitialState);
   const { players, page } = mainState;
 
-  const startGame = () => dispatch({ type: "START_GAME", game: "ing" });
   const resetGame = () => dispatch({ type: "RESET_GAME", game: "start" });
   const endGame = () => dispatch({ type: "END_GAME", game: "end" });
+  const startGame = () => {
+    dispatch({ type: "START_GAME", game: "ing" });
+  };
 
   const onIncBtn = () => {
     if (players >= 10) return;
