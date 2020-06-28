@@ -69,18 +69,18 @@ export const mainReducer = (mainState, action) => {
         ladder: action.ladder,
       };
     case "GET_RESULTS":
-      // return {
-      //   ...mainState,
-      //   game: "end",
-      //   profiles: mainState.profiles.map((p, i) => {
-      //     return { ...p, result: action.results[i] };
-      //   }),
-      // };
       return {
         ...mainState,
         game: "end",
-        results: action.results,
+        profiles: mainState.profiles.map((p, i) => {
+          return { ...p, result: action.results[i] };
+        }),
       };
+    // return {
+    //   ...mainState,
+    //   game: "end",
+    //   results: action.results,
+    // };
     default:
       throw new Error("ERROR");
   }

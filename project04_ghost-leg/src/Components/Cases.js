@@ -12,7 +12,7 @@ const Cases = () => {
         {profiles.map(({ id }, i) => (
           <input
             key={id}
-            className={id}
+            className={i}
             placeholder={`case${i + 1}`}
             onChange={getInputs}
           />
@@ -22,9 +22,9 @@ const Cases = () => {
   } else {
     return (
       <>
-        {profiles.map(({ id }) => (
+        {profiles.map(({ id }, i) => (
           <span key={id} className={"caseSpans"}>
-            {cases[id]}
+            {cases[i]}
           </span>
         ))}
       </>

@@ -190,3 +190,18 @@ input,
 .resultsTitle {
   text-align: center;
 }
+
+.results {
+  background: lightcoral;
+  display: flex;
+  justify-content: space-around;
+}
+
+.resultProfile {
+  background: lightyellow;
+  padding: 10px 30px;
+}
+
+.resultImg {
+  width: 25%;
+}

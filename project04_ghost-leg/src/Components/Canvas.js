@@ -9,6 +9,7 @@ const Canvas = () => {
   const { players, legs, profiles } = mainState;
 
   const canvasRef = React.useRef(null);
+  const resultsArray = new Array(players).fill(0);
   let canvas = null;
   let ctx = null;
   let legGap = 15;
@@ -51,7 +52,12 @@ const Canvas = () => {
     <>
       <canvas className={"canvas"} ref={canvasRef}></canvas>
       {profiles.map(({ id }, profile) => (
-        <Paths key={id} canvasRef={canvasRef} profile={profile} />
+        <Paths
+          key={id}
+          canvasRef={canvasRef}
+          profile={profile}
+          resultsArray={resultsArray}
+        />
       ))}
     </>
   );
