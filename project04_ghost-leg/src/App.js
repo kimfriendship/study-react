@@ -11,6 +11,10 @@ function App() {
   const [mainState, dispatch] = useReducer(mainReducer, mainInitialState);
   const { players, page } = mainState;
 
+  const startGame = () => dispatch({ type: "START_GAME", game: "ing" });
+  const resetGame = () => dispatch({ type: "RESET_GAME", game: "start" });
+  const endGame = () => dispatch({ type: "END_GAME", game: "end" });
+
   const onIncBtn = () => {
     if (players >= 10) return;
     dispatch({ type: "INC_PLAYERS" });
@@ -30,6 +34,7 @@ function App() {
   const goBackBtn = () => {
     const p = page === "game" ? "main" : "game";
     dispatch({ type: "CHANGE_PAGE", page: p });
+    resetGame();
   };
 
   const getRandom = (min, max) => {
@@ -102,8 +107,6 @@ function App() {
     dispatch({ type: "GET_LADDER", ladder });
   };
 
-  const startGame = () => dispatch({ type: "START_GAME", game: "ing" });
-
   const value = {
     mainState,
     dispatch,
@@ -115,6 +118,8 @@ function App() {
     getRandom,
     getLadder,
     startGame,
+    resetGame,
+    endGame,
   };
 
   return (

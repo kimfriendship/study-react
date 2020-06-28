@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GameContext } from "../App.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Canvas from "../Components/Canvas.js";
 import Cases from "../Components/Cases.js";
 
@@ -22,7 +22,6 @@ const Game = () => {
         })}
       </ul>
       {game === "start" ? <div className={"ladderHide"}></div> : <Canvas />}
-      {game === "end" ? <div className={"ladderCover"}></div> : null}
       <div className={"casesContainer"}>
         <Cases />
       </div>
@@ -30,8 +29,12 @@ const Game = () => {
         <button className={"goBtn"} onClick={startGame}>
           GO!
         </button>
-      ) : game === "end" ? (
-        <button className={"resultBtn"}>See All Results</button>
+      ) : null}
+      {game === "end" ? (
+        <button className={"resultBtn"}>
+          <FontAwesomeIcon icon={faArrowRight} className={"icon"} size={"2x"} />
+          <span>See all results</span>
+        </button>
       ) : null}
       <button onClick={goBackBtn} className={"goBackBtn"}>
         <FontAwesomeIcon icon={faArrowLeft} className={"icon"} size={"2x"} />

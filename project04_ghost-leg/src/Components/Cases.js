@@ -1,16 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { GameContext } from "../App.js";
 
 const Cases = () => {
   const context = useContext(GameContext);
   const { mainState, getInputs } = context;
   const { profiles, game, cases } = mainState;
-  console.log(profiles.map(({ id }) => id));
-  console.log(profiles.map(({ id }) => console.log(cases[id])));
-
-  useEffect(() => {
-    console.log(cases);
-  }, [cases]);
 
   if (game === "start") {
     return (
@@ -18,7 +12,7 @@ const Cases = () => {
         {profiles.map(({ id }, i) => (
           <input
             key={id}
-            className={"caseInputs"}
+            className={id}
             placeholder={`case${i + 1}`}
             onChange={getInputs}
           />

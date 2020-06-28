@@ -30,6 +30,11 @@ export const mainReducer = (mainState, action) => {
         ...mainState,
         game: action.game,
       };
+    case "RESET_GAME":
+      return {
+        ...mainState,
+        game: action.game,
+      };
     case "GET_PROFILES":
       return {
         ...mainState,
