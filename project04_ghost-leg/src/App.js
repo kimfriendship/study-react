@@ -3,7 +3,7 @@ import "./App.css";
 import Main from "./Pages/Main";
 import { mainReducer, mainInitialState, data } from "./Reducer";
 import Game from "./Pages/Game";
-import Result from "./Pages/Result";
+import Result from "./Pages/Results";
 
 export const GameContext = createContext({});
 
@@ -12,7 +12,6 @@ function App() {
   const { players, page } = mainState;
 
   const resetGame = () => dispatch({ type: "RESET_GAME", game: "start" });
-  const endGame = () => dispatch({ type: "END_GAME", game: "end" });
   const startGame = () => {
     dispatch({ type: "START_GAME", game: "ing" });
   };
@@ -37,6 +36,10 @@ function App() {
     const p = page === "game" ? "main" : "game";
     dispatch({ type: "CHANGE_PAGE", page: p });
     resetGame();
+  };
+
+  const seeResultsBtn = () => {
+    dispatch({ type: "CHANGE_PAGE", page: "results" });
   };
 
   const getRandom = (min, max) => {
@@ -121,7 +124,7 @@ function App() {
     getLadder,
     startGame,
     resetGame,
-    endGame,
+    seeResultsBtn,
   };
 
   return (

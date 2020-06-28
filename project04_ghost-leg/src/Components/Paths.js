@@ -5,8 +5,9 @@ import { GameContext } from "../App.js";
 const Paths = ({ canvasRef, profile }) => {
   const context = useContext(GameContext);
   const { mainState, dispatch } = context;
-  const { players, profiles, ladder } = mainState;
+  const { players, profiles, ladder, game } = mainState;
 
+  let startDrawing = null;
   let canvas = null;
   let ctx = null;
   let legGap = 15;
@@ -39,7 +40,7 @@ const Paths = ({ canvasRef, profile }) => {
         console.log(profile, "drawing right leg");
         ballX += move;
         ctx.beginPath();
-        ctx.arc(ballX + 1, ballY, 0.3, 0, Math.PI * 2);
+        ctx.arc(ballX + 1, ballY, 0.5, 0, Math.PI * 2);
         ctx.fillStyle = profiles[p].color;
         ctx.fill();
         ctx.closePath();
@@ -51,7 +52,7 @@ const Paths = ({ canvasRef, profile }) => {
         console.log(profile, "drawing left leg");
         ballX += move;
         ctx.beginPath();
-        ctx.arc(ballX + 1, ballY, 0.3, 0, Math.PI * 2);
+        ctx.arc(ballX + 1, ballY, 0.5, 0, Math.PI * 2);
         ctx.fillStyle = profiles[p].color;
         ctx.fill();
         ctx.closePath();
@@ -63,11 +64,11 @@ const Paths = ({ canvasRef, profile }) => {
   };
 
   const drawLines = (p) => {
-    if (isCrossing || ballY === canvas.height) return;
-    if (ballY === canvas.height) {
-      // dispatch({ type: "GET_RESULTS", index: p, result: ballX });
-      console.log(profiles);
-      return;
+    if (isCrossing) return;
+    if (ballY === canvas.height + 10) {
+      clearInterval(startDrawing);
+      dispatch({ type: "GET_RESULTS", index: profile, result: ballX });
+      // console.log(game, ballX, profiles[p]);
     }
 
     const checkLegs = ballY % legGap === 0;
@@ -111,6 +112,8 @@ const Paths = ({ canvasRef, profile }) => {
   };
 
   useEffect(() => {
+    // console.log(game, ballX, profiles[profile]);
+    if (game === "end") return;
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
     firstX = canvas.width / (players * 2);
@@ -118,7 +121,7 @@ const Paths = ({ canvasRef, profile }) => {
     ballX = firstX + diffX * profile;
     LC = profile;
 
-    const startDrawing = setInterval(() => drawLines(profile), 10);
+    startDrawing = setInterval(() => drawLines(profile), 10);
     return () => clearInterval(startDrawing);
   });
 

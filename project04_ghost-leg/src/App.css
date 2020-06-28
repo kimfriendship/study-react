@@ -71,7 +71,8 @@ ul {
 .profiles,
 .casesContainer,
 .ladder,
-.goBackBtn {
+.goBackBtn,
+.resultsBtn {
   display: flex;
   justify-content: space-evenly;
 }
@@ -106,19 +107,26 @@ ul {
   color: orange;
 }
 
-.goBackBtn {
+.goBackBtn,
+.resultsBtn {
   font-size: 15px;
   position: absolute;
-  bottom: -20px;
+  bottom: -30px;
   right: 0;
   color: lightslategray;
 }
 
-.goBackBtn:hover {
+.resultsBtn {
+  bottom: 0;
+}
+
+.goBackBtn:hover,
+.resultsBtn:hover {
   color: black;
 }
 
-.goBackBtn > span {
+.goBackBtn > span,
+.resultsBtn > span {
   padding: 7px 0;
 }
 

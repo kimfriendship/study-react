@@ -7,7 +7,7 @@ import Cases from "../Components/Cases.js";
 
 const Game = () => {
   const context = useContext(GameContext);
-  const { mainState, goBackBtn, startGame } = context;
+  const { mainState, goBackBtn, startGame, seeResultsBtn } = context;
   const { profiles, game } = mainState;
 
   return (
@@ -31,9 +31,9 @@ const Game = () => {
         </button>
       ) : null}
       {game === "end" ? (
-        <button className={"resultBtn"}>
+        <button className={"resultsBtn"} onClick={seeResultsBtn}>
+          <span>See All Results</span>
           <FontAwesomeIcon icon={faArrowRight} className={"icon"} size={"2x"} />
-          <span>See all results</span>
         </button>
       ) : null}
       <button onClick={goBackBtn} className={"goBackBtn"}>

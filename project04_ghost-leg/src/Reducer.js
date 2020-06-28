@@ -62,6 +62,7 @@ export const mainReducer = (mainState, action) => {
     case "GET_RESULTS":
       return {
         ...mainState,
+        game: "end",
         profiles: mainState.profiles.map((p, i) => {
           return i === action.index ? { ...p, result: action.result } : p;
         }),

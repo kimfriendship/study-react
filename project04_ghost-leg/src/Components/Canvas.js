@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { GameContext } from "../App.js";
 import Paths from "./Paths.js";
@@ -41,9 +42,7 @@ const Canvas = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     canvas = canvasRef.current;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     ctx = canvas.getContext("2d");
     drawLadders();
   }, []);
