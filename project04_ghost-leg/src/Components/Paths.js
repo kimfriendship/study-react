@@ -5,7 +5,7 @@ import { GameContext } from "../App.js";
 const Paths = ({ canvasRef, profile, resultsArray }) => {
   const context = useContext(GameContext);
   const { mainState, dispatch } = context;
-  const { players, profiles, ladder, game } = mainState;
+  const { players, profiles, ladder, game, legs } = mainState;
 
   let startDrawing = null;
   let canvas = null;
@@ -37,7 +37,6 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
 
     if (move > 0) {
       for (let i = 0; ballX < rightGap; i++) {
-        console.log(profile, "drawing right leg");
         ballX += move;
         ctx.beginPath();
         ctx.arc(ballX + 1, ballY, 0.5, 0, Math.PI * 2);
@@ -47,9 +46,7 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
       }
     }
     if (move < 0) {
-      // console.log("condition", ballX, leftGap);
       for (let i = 0; ballX > leftGap; i++) {
-        console.log(profile, "drawing left leg");
         ballX += move;
         ctx.beginPath();
         ctx.arc(ballX + 1, ballY, 0.5, 0, Math.PI * 2);
@@ -59,7 +56,6 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
       }
     }
 
-    ballY += 1;
     return ballX;
   };
 
@@ -85,7 +81,6 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
         right = ladder[LR][LC] === 1;
         left = ladder[LR][LC - 1] === 1;
         straight = right || left ? false : true;
-        console.log("line", p, LR, LC, right, left);
       }
 
       if (straight) {
@@ -94,17 +89,17 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
       }
 
       if (right) {
-        // console.log(profile, "right", ballX);
         ballX = crossLegs(p, 1, ballX, ballY);
         isCrossing = false;
         LC += 1;
+        ballY += 1;
       }
 
       if (left) {
-        // console.log(profile, "left", ballX);
         ballX = crossLegs(p, -1, ballX, ballY);
         isCrossing = false;
         LC -= 1;
+        ballY += 1;
       }
     } else {
       drawBalls(p, ballX, diffX, ballY);
