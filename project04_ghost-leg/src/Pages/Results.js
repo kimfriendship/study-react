@@ -8,8 +8,6 @@ const Results = () => {
   const { mainState, goBackBtn, newGame } = context;
   const { profiles, cases } = mainState;
 
-  console.log(cases);
-
   return (
     <div>
       <h2 className={"resultsTitle"}>결과</h2>

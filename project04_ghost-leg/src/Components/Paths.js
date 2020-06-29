@@ -5,7 +5,7 @@ import { GameContext } from "../App.js";
 const Paths = ({ canvasRef, profile, resultsArray }) => {
   const context = useContext(GameContext);
   const { mainState, dispatch } = context;
-  const { players, profiles, ladder, game, legs } = mainState;
+  const { players, profiles, ladder, game } = mainState;
 
   let startDrawing = null;
   let canvas = null;
@@ -31,9 +31,6 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
     isCrossing = true;
     const rightGap = firstX * (LC ? 2 * LC + 3 : 3);
     const leftGap = firstX * (LC === 1 ? LC : 2 * LC - 1);
-
-    // console.log("ballX", ballX);
-    // console.log("gaps", firstX, rightGap, leftGap);
 
     if (move > 0) {
       for (let i = 0; ballX < rightGap; i++) {
@@ -63,7 +60,6 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
     if (isCrossing) return;
     if (ballY === canvas.height + 30) {
       clearInterval(startDrawing);
-      console.log(startDrawing);
       dispatch({
         type: "GET_RESULTS",
         results: resultsArray,
@@ -120,7 +116,6 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
     LC = profile;
 
     startDrawing = setInterval(() => drawLines(profile), 10);
-    console.log(startDrawing);
     return () => clearInterval(startDrawing);
   });
 

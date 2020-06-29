@@ -47,6 +47,7 @@ export const mainReducer = (mainState, action) => {
       return {
         ...mainState,
         game: "start",
+        cases: {},
         profiles: mainState.profiles.map((p) => ({ ...p, result: 0 })),
         page: "main",
       };

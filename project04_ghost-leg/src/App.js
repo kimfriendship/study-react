@@ -81,7 +81,6 @@ function App() {
     const id = target.className;
     const value = target.value.trim();
     dispatch({ type: "GET_INPUTS", id, value });
-    readyGame();
   };
 
   const getLegs = () => {
@@ -137,6 +136,7 @@ function App() {
     getRandom,
     getLadder,
     startGame,
+    readyGame,
     newGame,
     resetGame,
     seeResultsBtn,

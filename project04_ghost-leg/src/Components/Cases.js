@@ -3,7 +3,7 @@ import { GameContext } from "../App.js";
 
 const Cases = () => {
   const context = useContext(GameContext);
-  const { mainState, getInputs } = context;
+  const { mainState, getInputs, readyGame } = context;
   const { profiles, game, cases } = mainState;
 
   if (game === "start" || game === "ready") {
@@ -15,6 +15,7 @@ const Cases = () => {
             className={i}
             placeholder={`case${i + 1}`}
             onChange={getInputs}
+            onBlur={readyGame}
           />
         ))}
       </>
