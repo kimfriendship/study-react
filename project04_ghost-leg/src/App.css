@@ -89,6 +89,7 @@ ul {
   margin: 0 3px;
 }
 
+.readyBtn,
 .goBtn {
   font-size: 25px;
   font-weight: 700;
@@ -98,6 +99,10 @@ ul {
   width: 100px;
   color: lightgray;
   transition: 0.5s;
+}
+
+.goBtn {
+  color: black;
 }
 
 .goBtn:hover {
@@ -196,19 +201,22 @@ input,
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 40px;
-  width: 100%;
+  margin: 40px auto 0;
+  width: 80%;
 }
 
 .resultProfile {
   width: 50%;
+  min-width: 250px;
   padding: 10px 30px;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .resultImg {
   width: 25%;
+  max-width: 70px;
 }
 
 .resultCase {
@@ -219,6 +227,7 @@ input,
   font-size: 20px;
   border-radius: 5px;
   width: 60%;
+  max-width: 200px;
   line-height: 40px;
   margin: 10px 20px 0;
 }

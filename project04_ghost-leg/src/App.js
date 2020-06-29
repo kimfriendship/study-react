@@ -9,12 +9,24 @@ export const GameContext = createContext({});
 
 function App() {
   const [mainState, dispatch] = useReducer(mainReducer, mainInitialState);
-  const { players, page } = mainState;
+  const { players, page, cases } = mainState;
 
-  const resetGame = () => dispatch({ type: "RESET_GAME", game: "start" });
-  const newGame = () => dispatch({ type: "NEW_GAME", game: "start" });
+  const resetGame = () => dispatch({ type: "RESET_GAME" });
+  const newGame = () => dispatch({ type: "NEW_GAME" });
   const startGame = () => {
-    dispatch({ type: "START_GAME", game: "ing" });
+    for (let i = 0; i < players; i++) {
+      if (!cases[i]) return;
+    }
+    dispatch({ type: "START_GAME" });
+  };
+  const readyGame = () => {
+    for (let i = 0; i < players; i++) {
+      if (!cases[i]) {
+        dispatch({ type: "READY_GAME", game: "start" });
+        return;
+      }
+    }
+    dispatch({ type: "READY_GAME", game: "ready" });
   };
 
   const onIncBtn = () => {
@@ -67,8 +79,9 @@ function App() {
 
   const getInputs = ({ target }) => {
     const id = target.className;
-    const value = target.value;
+    const value = target.value.trim();
     dispatch({ type: "GET_INPUTS", id, value });
+    readyGame();
   };
 
   const getLegs = () => {

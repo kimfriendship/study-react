@@ -26,22 +26,27 @@ export const mainReducer = (mainState, action) => {
         ...mainState,
         page: action.page,
       };
-    case "START_GAME":
+    case "READY_GAME":
       return {
         ...mainState,
         game: action.game,
       };
+    case "START_GAME":
+      return {
+        ...mainState,
+        game: "ing",
+      };
     case "RESET_GAME":
       return {
         ...mainState,
-        game: action.game,
+        game: "start",
         profiles: mainState.profiles.map((p) => ({ ...p, result: 0 })),
         cases: {},
       };
     case "NEW_GAME":
       return {
         ...mainState,
-        game: action.game,
+        game: "start",
         profiles: mainState.profiles.map((p) => ({ ...p, result: 0 })),
         page: "main",
       };
@@ -133,7 +138,7 @@ export const data = [
     id: 7,
     name: "dolphin",
     src: "https://image.flaticon.com/icons/svg/3069/3069269.svg",
-    color: "skyblue",
+    color: "steelblue",
     result: 0,
   },
   {

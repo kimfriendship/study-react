@@ -67,6 +67,7 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
     if (isCrossing) return;
     if (ballY === canvas.height + 30) {
       clearInterval(startDrawing);
+      console.log(startDrawing);
       dispatch({
         type: "GET_RESULTS",
         results: resultsArray,
@@ -74,7 +75,7 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
     }
 
     const checkLegs = ballY % legGap === 0;
-    let move = 0.5;
+    let move = 1;
     let straight = true;
     let right = false;
     let left = false;
@@ -94,14 +95,14 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
 
       if (right) {
         // console.log(profile, "right", ballX);
-        ballX = crossLegs(p, 0.5, ballX, ballY);
+        ballX = crossLegs(p, 1, ballX, ballY);
         isCrossing = false;
         LC += 1;
       }
 
       if (left) {
         // console.log(profile, "left", ballX);
-        ballX = crossLegs(p, -0.5, ballX, ballY);
+        ballX = crossLegs(p, -1, ballX, ballY);
         isCrossing = false;
         LC -= 1;
       }
@@ -115,7 +116,6 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
   };
 
   useEffect(() => {
-    console.log(mainState.cases);
     if (game === "end") return;
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
@@ -125,6 +125,7 @@ const Paths = ({ canvasRef, profile, resultsArray }) => {
     LC = profile;
 
     startDrawing = setInterval(() => drawLines(profile), 10);
+    console.log(startDrawing);
     return () => clearInterval(startDrawing);
   });
 

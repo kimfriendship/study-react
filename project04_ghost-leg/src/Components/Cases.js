@@ -6,7 +6,7 @@ const Cases = () => {
   const { mainState, getInputs } = context;
   const { profiles, game, cases } = mainState;
 
-  if (game === "start") {
+  if (game === "start" || game === "ready") {
     return (
       <>
         {profiles.map(({ id }, i) => (
@@ -19,7 +19,7 @@ const Cases = () => {
         ))}
       </>
     );
-  } else {
+  } else if (game === "ing" || game === "end") {
     return (
       <>
         {profiles.map(({ id }, i) => (

@@ -21,11 +21,17 @@ const Game = () => {
           );
         })}
       </ul>
-      {game === "start" ? <div className={"ladderHide"}></div> : <Canvas />}
+      {game === "start" || game === "ready" ? (
+        <div className={"ladderHide"}></div>
+      ) : (
+        <Canvas />
+      )}
       <div className={"casesContainer"}>
         <Cases />
       </div>
       {game === "start" ? (
+        <button className={"readyBtn"}>GO!</button>
+      ) : game === "ready" ? (
         <button className={"goBtn"} onClick={startGame}>
           GO!
         </button>
