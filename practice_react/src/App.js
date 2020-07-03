@@ -1,8 +1,10 @@
 import React from 'react';
-import Users from './Users';
+import Calendar from 'react-calendar';
+// import 'react-calendar/dist/Calendar.css';
+// import Users from './Users';
 
 const App = () => {
-  return <Users />;
+  return <Calendar />;
 };
 
 export default App;
