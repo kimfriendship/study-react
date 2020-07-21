@@ -1,56 +1,46 @@
-import React from "react";
 import { createStore } from "redux";
 
+// initial state
 const initialState = {
   counter: 0,
   text: "",
   list: [],
 };
 
+// action type
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
-const CHANGE_INPUT = "CHANGE_INPUT";
-const ADD_TODO = "ADD_TODO";
+const CHANGE_TEXT = "CHANGE_TEXT";
+const ADD_LIST = "ADD_LIST";
 
-const increase = () => ({
-  type: INCREASE,
-});
+// action creator
+const increase = () => ({ type: INCREASE });
+const decrease = () => ({ type: DECREASE });
+const changeText = (text) => ({ type: CHANGE_TEXT, text });
+const addList = (item) => ({ type: ADD_LIST, item });
 
-const decrease = () => ({
-  type: DECREASE,
-});
-
-const changeInput = (text) => ({
-  type: CHANGE_INPUT,
-  text,
-});
-
-const addTodo = (item) => ({
-  type: ADD_TODO,
-  item,
-});
-
+// reducer
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case INCREASE:
+    case "INCREASE":
       return {
         ...state,
         counter: state.counter + 1,
       };
-    case DECREASE:
+    case "DECREASE":
       return {
         ...state,
         counter: state.counter - 1,
       };
-    case CHANGE_INPUT:
+    case "CHANGE_TEXT":
       return {
         ...state,
         text: action.text,
       };
-    case ADD_TODO:
+    case "ADD_LIST":
       return {
         ...state,
-        list: state.list.concat(action.item),
+        list: [...state.list, action.item],
       };
     default:
       return state;
@@ -58,6 +48,7 @@ const reducer = (state = initialState, action) => {
 };
 
 const store = createStore(reducer);
+console.log(store.getState());
 
 const listener = () => {
   const state = store.getState();
@@ -67,16 +58,10 @@ const listener = () => {
 const unsubscribe = store.subscribe(listener);
 // unsubscribe();
 
-window.store = store;
-window.unsubscribe = unsubscribe;
-
 store.dispatch(increase());
 store.dispatch(decrease());
-store.dispatch(changeInput("hello"));
-store.dispatch(addTodo({ id: 1, text: "good night" }));
+store.dispatch(changeText("hello"));
+store.dispatch(addList({ id: 1, text: "lala" }));
 
-const Exercise = () => {
-  return <div></div>;
-};
-
-export default Exercise;
+window.store = store;
+window.unsubscribe = unsubscribe;
