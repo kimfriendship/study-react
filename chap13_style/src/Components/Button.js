@@ -4,10 +4,11 @@ import "./buttons.scss";
 
 // size: small, medium, large
 // color: green, blue, pink
-const Button = ({ children, size, color, outline, fullWidth }) => {
+const Button = ({ children, size, color, outline, fullWidth, ...rest }) => {
   return (
     <button
       className={classNames("button", size, color, { outline, fullWidth })}
+      {...rest}
     >
       {children}
     </button>
