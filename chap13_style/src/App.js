@@ -1,27 +1,32 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import StyledButton from "./Components/StyledButton";
 // import CheckboxWrapper from "./Components/CheckboxWrapper";
 // import Buttons from "./Components/Buttons";
 
-const Circle = styled.div`
-  width: 5rem;
-  height: 5rem;
-  background: ${(props) => props.color};
-  border-radius: 50%;
-  margin: 1rem;
-  ${(props) =>
-    props.huge &&
-    `
-    width: 10rem;
-    height: 10rem;
-  `}
+const AppBlock = styled.div`
+  width: 512px;
+  margin: 4rem auto 0;
+  padding: 1rem;
+  border: 1px solid black;
 `;
+
+const palette = {
+  blue: "#1c7ed6",
+  green: "#0ca678",
+  pink: "#faa2c1",
+};
 
 function App() {
   return (
     <div className="App">
-      <Circle color="blue" />
-      <Circle color="green" huge />
+      <ThemeProvider theme={{ palette }}>
+        <AppBlock>
+          <StyledButton>BUTTON</StyledButton>
+          <StyledButton color="pink">BUTTON</StyledButton>
+          <StyledButton color="blue">BUTTON</StyledButton>
+        </AppBlock>
+      </ThemeProvider>
     </div>
   );
 }
