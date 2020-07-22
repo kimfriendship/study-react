@@ -1,0 +1,75 @@
+$blue: #1c7ed6;
+$green: #0ca678;
+$pink: #faa2c1;
+
+@mixin button-color($color) {
+  background: $color;
+  &:hover {
+    background: lighten($color, 20%);
+  }
+  &:active {
+    background: darken($color, 20%);
+  }
+
+  &.outline {
+    border: 1px solid $color;
+    background: none;
+    color: $color;
+
+    &:hover,
+    &:active {
+      background: $color;
+    }
+  }
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: white;
+
+  &.small {
+    font-size: 0.8rem;
+    height: 1.5rem;
+  }
+
+  &.medium {
+    font-size: 1rem;
+    height: 2rem;
+  }
+
+  &.large {
+    font-size: 1.2rem;
+    height: 2.7rem;
+  }
+
+  &.blue {
+    @include button-color($blue);
+  }
+  &.green {
+    @include button-color($green);
+  }
+  &.pink {
+    @include button-color($pink);
+  }
+
+  & + & {
+    margin-left: 1rem;
+  }
+
+  &.fullWidth {
+    width: 100%;
+    justify-content: center;
+
+    & + & {
+      margin-left: 0;
+      margin-top: 1rem;
+    }
+  }
+}

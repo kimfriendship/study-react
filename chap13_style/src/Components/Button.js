@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import "./buttons.scss";
+import "./button.scss";
 
 // size: small, medium, large
 // color: green, blue, pink
