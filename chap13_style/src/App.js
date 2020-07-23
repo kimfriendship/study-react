@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import StyledButton from "./Components/StyledButton";
+import Dialog from "./Components/Dialog";
 // import CheckboxWrapper from "./Components/CheckboxWrapper";
 // import Buttons from "./Components/Buttons";
 
@@ -9,6 +10,7 @@ const AppBlock = styled.div`
   margin: 4rem auto 0;
   padding: 1rem;
   border: 1px solid black;
+  border-radius: 5px;
 `;
 
 const ButtonGroup = styled.div`
@@ -24,47 +26,38 @@ const palette = {
 };
 
 function App() {
+  const [dialog, setDialog] = useState(false);
+  const onClick = () => setDialog(true);
+
+  const onConfirm = () => {
+    console.log("yes");
+    setDialog(false);
+  };
+
+  const onCancel = () => {
+    console.log("no");
+    setDialog(false);
+  };
+
   return (
     <div className="App">
       <ThemeProvider theme={{ palette }}>
-        <AppBlock>
-          <ButtonGroup>
-            <StyledButton size="large">BUTTON</StyledButton>
-            <StyledButton>BUTTON</StyledButton>
-            <StyledButton size="small">BUTTON</StyledButton>
-          </ButtonGroup>
-          <ButtonGroup>
-            <StyledButton color="pink" size="large">
+        <>
+          <AppBlock>
+            <StyledButton size="large" onClick={onClick}>
               BUTTON
             </StyledButton>
-            <StyledButton color="pink">BUTTON</StyledButton>
-            <StyledButton color="pink" size="small">
-              BUTTON
-            </StyledButton>
-          </ButtonGroup>
-          <ButtonGroup>
-            <StyledButton size="large" outline color="blue">
-              BUTTON
-            </StyledButton>
-            <StyledButton outline color="blue">
-              BUTTON
-            </StyledButton>
-            <StyledButton size="small" outline color="blue">
-              BUTTON
-            </StyledButton>
-          </ButtonGroup>
-          <ButtonGroup>
-            <StyledButton size="large" fullWidth>
-              BUTTON
-            </StyledButton>
-            <StyledButton size="large" color="pink" fullWidth>
-              BUTTON
-            </StyledButton>
-            <StyledButton fullWidth size="large" color="blue">
-              BUTTON
-            </StyledButton>
-          </ButtonGroup>
-        </AppBlock>
+          </AppBlock>
+          <Dialog
+            title="Are you sure..."
+            dialog={dialog}
+            onConfirm={onConfirm}
+            onCancel={onCancel}
+            visible={dialog}
+          >
+            you want to quit?
+          </Dialog>
+        </>
       </ThemeProvider>
     </div>
   );
