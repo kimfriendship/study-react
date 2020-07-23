@@ -11,6 +11,12 @@ const AppBlock = styled.div`
   border: 1px solid black;
 `;
 
+const ButtonGroup = styled.div`
+  & + & {
+    margin-top: 1rem;
+  }
+`;
+
 const palette = {
   blue: "#1c7ed6",
   green: "#0ca678",
@@ -22,9 +28,42 @@ function App() {
     <div className="App">
       <ThemeProvider theme={{ palette }}>
         <AppBlock>
-          <StyledButton>BUTTON</StyledButton>
-          <StyledButton color="pink">BUTTON</StyledButton>
-          <StyledButton color="blue">BUTTON</StyledButton>
+          <ButtonGroup>
+            <StyledButton size="large">BUTTON</StyledButton>
+            <StyledButton>BUTTON</StyledButton>
+            <StyledButton size="small">BUTTON</StyledButton>
+          </ButtonGroup>
+          <ButtonGroup>
+            <StyledButton color="pink" size="large">
+              BUTTON
+            </StyledButton>
+            <StyledButton color="pink">BUTTON</StyledButton>
+            <StyledButton color="pink" size="small">
+              BUTTON
+            </StyledButton>
+          </ButtonGroup>
+          <ButtonGroup>
+            <StyledButton size="large" outline color="blue">
+              BUTTON
+            </StyledButton>
+            <StyledButton outline color="blue">
+              BUTTON
+            </StyledButton>
+            <StyledButton size="small" outline color="blue">
+              BUTTON
+            </StyledButton>
+          </ButtonGroup>
+          <ButtonGroup>
+            <StyledButton size="large" fullWidth>
+              BUTTON
+            </StyledButton>
+            <StyledButton size="large" color="pink" fullWidth>
+              BUTTON
+            </StyledButton>
+            <StyledButton fullWidth size="large" color="blue">
+              BUTTON
+            </StyledButton>
+          </ButtonGroup>
         </AppBlock>
       </ThemeProvider>
     </div>
