@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { MdAdd } from "react-icons/md";
+import { useTodoDispatch, useTodoNextId } from "../Context";
 
 const CircleButton = styled.div`
   background: #15aabf;
@@ -50,7 +51,7 @@ const InsertFormPositioner = styled.div`
   left: 0;
 `;
 
-const InsertForm = styled.div`
+const InsertForm = styled.form`
   background: #eee;
   padding: 32px 32px 72px;
   border-bottom-left-radius: 16px;
@@ -70,14 +71,35 @@ const Input = styled.input`
 
 const TodoCreate = () => {
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+
   const onToggle = () => setOpen(!open);
+  const onChange = (e) => setInput(e.target.value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: "CREATE",
+      todo: { id: nextId.current, text: input, done: false },
+    });
+    setInput("");
+    setOpen(false);
+    nextId.current += 1;
+  };
+
+  const dispatch = useTodoDispatch();
+  const nextId = useTodoNextId();
 
   return (
     <>
       {open && (
         <InsertFormPositioner>
-          <InsertForm>
-            <Input autoFocus placeholder="Enter Todos!" />
+          <InsertForm onSubmit={onSubmit}>
+            <Input
+              autoFocus
+              placeholder="Enter Todos!"
+              onChange={onChange}
+              value={input}
+            />
           </InsertForm>
         </InsertFormPositioner>
       )}
@@ -88,4 +110,4 @@ const TodoCreate = () => {
   );
 };
 
-export default TodoCreate;
+export default React.memo(TodoCreate);
