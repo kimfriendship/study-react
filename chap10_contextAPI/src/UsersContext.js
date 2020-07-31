@@ -67,3 +67,20 @@ const usersReducer = (action, state) => {
       throw new Error(`Unhandled action type ${action.type}`);
   }
 };
+
+const UsersStateContext = createContext(null);
+const UsersDispatchContext = createContext(null);
+
+const UserProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(usersReducer, initialState);
+
+  return (
+    <>
+      <UsersStateContext.Provider value={state}>
+        <UsersDispatchContext.Provider value={dispatch}>
+          {children}
+        </UsersDispatchContext.Provider>
+      </UsersStateContext.Provider>
+    </>
+  );
+};
