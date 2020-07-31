@@ -12,13 +12,13 @@ const getUsers = async () => {
 
 const Users = () => {
   const [userId, setUserId] = useState(null);
-  const { data: users, error, isLoading, reload } = useAsync({
-    promiseFn: getUsers,
+  const { data: users, error, isLoading, reload, run } = useAsync({
+    deferFn: getUsers,
   });
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>ERROR!</div>;
-  if (!users) return <button onClick={reload}>Fetch</button>;
+  if (!users) return <button onClick={run}>Fetch</button>;
 
   return (
     <>
