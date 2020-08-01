@@ -1,4 +1,5 @@
 import React, { useReducer, useContext, createContext } from "react";
+import axios from "axios";
 
 const initialState = {
   users: {
@@ -31,7 +32,7 @@ const error = (error) => ({
   error,
 });
 
-const usersReducer = (action, state) => {
+const usersReducer = (state, action) => {
   switch (action.type) {
     case "GET_USERS":
       return {
@@ -84,3 +85,45 @@ const UserProvider = ({ children }) => {
     </>
   );
 };
+
+const useUsersState = () => {
+  const state = useContext(UsersStateContext);
+  if (!state) {
+    throw new Error("Cannot find UserProvider");
+  }
+  return state;
+};
+
+const useUsersDispatch = () => {
+  const dispatch = useContext(UsersDispatchContext);
+  if (!dispatch) {
+    throw new Error("Cannot find UserProvider");
+  }
+  return dispatch;
+};
+
+const getUsers = async (dispatch) => {
+  dispatch({ type: "GET_USERS" });
+  try {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+    dispatch({ type: "GET_USERS_SUCCESS", data: response.data });
+  } catch (e) {
+    dispatch({ type: "GET_USERS_ERROR", error: e });
+  }
+};
+
+const getUser = async (dispatch, id) => {
+  dispatch({ type: "GET_USER" });
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/users/${id}`
+    );
+    dispatch({ type: "GET_USER_SUCCESS", data: response.data });
+  } catch (e) {
+    dispatch({ type: "GET_USER_ERROR", error: e });
+  }
+};
+
+export { UserProvider, useUsersDispatch, useUsersState, getUsers, getUser };
