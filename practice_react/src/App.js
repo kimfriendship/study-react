@@ -4,7 +4,18 @@ import Calendar from 'react-calendar';
 // import Users from './Users';
 
 const App = () => {
-  return <Calendar />;
+  return (
+    <div>
+      <input
+        type="text"
+        onKeyUp={(e) => {
+          if (e.keyCode !== 13) return;
+
+          console.log('blabla');
+        }}
+      />
+    </div>
+  );
 };
 
 export default App;
