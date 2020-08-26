@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import './index.css';
 
 const Range = Slider.createSliderWithTooltip(Slider.Range);
 
@@ -13,6 +13,7 @@ const Handle = () => {
 };
 
 function App() {
+  const valueRef = useRef();
   const [state, setState] = useState({ value: [12000, 1000000] });
   const [input, setInput] = useState({
     min: 12000,
@@ -20,18 +21,18 @@ function App() {
   });
   const onChange = (e) => {
     setState(state);
-    console.log(state);
-    setInput({ min: state.value[0], max: state.value[1] });
+    setInput({ min: e[0], max: e[1] });
   };
   const onSetInput = (e) => {
     if (e.target.id === 'min') {
       setInput({ ...input, min: e.target.value });
-      setState([e.target.value, state.value[1]]);
+      setState({ value: [e.target.value, state.value[1]] });
     } else {
       setInput({ ...input, max: e.target.value });
-      setState([state.value[0], e.target.value]);
+      setState({ value: [state.value[0], e.target.value] });
     }
   };
+
   return (
     <div>
       <label htmlFor="min">MIN</label>
@@ -51,19 +52,14 @@ function App() {
       <Range
         min={12000}
         max={1000000}
-        // value={state.value}
         allowCross={false}
         defaultValue={[12000, 1000000]}
         onChange={onChange}
-        tipFormatter={(value) => <span className="tooltip">{value}€</span>}
-        // tipFormatter={(value) => ''}
+        tipFormatter={(value) => ''}
+        tipProps={{ visible: false }}
         style={{
           width: '500px',
           margin: '5rem',
-          // height: '2px',
-          // position: 'relative',
-          // overflow: 'hidden',
-          // background: 'red',
         }}
         handle={<Handle />}
         // handleStyle={{
