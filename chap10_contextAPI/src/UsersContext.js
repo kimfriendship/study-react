@@ -107,6 +107,7 @@ const getUsers = async (dispatch) => {
   try {
     const response = await axios.get(
       "https://jsonplaceholder.typicode.com/users"
+      // "/Ex_Test/aaa.jsp"
     );
     dispatch({ type: "GET_USERS_SUCCESS", data: response.data });
   } catch (e) {
