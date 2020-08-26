@@ -1,50 +1,44 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import Slider from 'rc-slider';
 
-const homes = axios.create();
+const Range = Slider.createSliderWithTooltip(Slider.Range);
+
+const Handle = () => {
+  return (
+    <button>
+      <path d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path>
+    </button>
+  );
+};
 
 function App() {
-  const getHome = () => {
-    homes
-      .get('/test/')
-      .then((res) => res.data)
-      .then((res) => console.log(res))
-      .catch((e) => {
-        console.error(e, e.message);
-      });
-  };
-
-  const payload = {
-    id: 1,
-    title: 'my Home',
-  };
-
-  const postHome = (payload) => {
-    homes
-      .post('/test/post', payload)
-      .then((res) => res.data)
-      .then((res) => console.log(res))
-      .catch((e) => {
-        console.error(e, e.message);
-      });
-  };
-
-  // const postHome = (id) => {
-  //   homes.post('/Ex_Test/hello.do')
-  //   .then(res => res.)
-  // }
-
+  const [value, setValue] = useState([12000, 1000000]);
+  const onChange = () => setValue(value);
   return (
-    <div className="App">
-      <button onClick={getHome}>GET</button>
-      <button
-        onClick={() => {
-          postHome(payload);
-        }}
-      >
-        POST
-      </button>
-    </div>
+    <Range
+      min={12000}
+      max={1000000}
+      allowCross={false}
+      defaultValue={[12000, 1000000]}
+      onChange={onChange}
+      style={{
+        width: '500px',
+        height: '2px',
+        background: 'red',
+        margin: '5rem',
+        position: 'relative',
+      }}
+      handle={<Handle />}
+      handleStyle={{
+        width: '20px',
+        height: '20px',
+        background: 'green',
+        position: 'absolute',
+        top: '-9px',
+        borderRadius: '50%',
+        // path: 'M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z',
+      }}
+    ></Range>
   );
 }
 
