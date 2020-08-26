@@ -13,64 +13,59 @@ const Handle = () => {
 };
 
 function App() {
-  const valueRef = useRef();
+  // const valueRef = useRef();
   const [state, setState] = useState({ value: [12000, 1000000] });
   const [input, setInput] = useState({
     min: 12000,
     max: 1000000,
   });
   const onChange = (e) => {
-    setState(state);
+    setState({ value: e });
     setInput({ min: e[0], max: e[1] });
   };
   const onSetInput = (e) => {
     if (e.target.id === 'min') {
-      setInput({ ...input, min: e.target.value });
-      setState({ value: [e.target.value, state.value[1]] });
+      setInput({ ...input, min: +e.target.value });
     } else {
-      setInput({ ...input, max: e.target.value });
-      setState({ value: [state.value[0], e.target.value] });
+      setInput({ ...input, max: +e.target.value });
     }
+  };
+  const onSetValue = () => {
+    setState({ value: [input.min, input.max] });
   };
 
   return (
     <div>
       <label htmlFor="min">MIN</label>
       <input
-        type="text"
+        type="number"
         id="min"
         value={input.min}
         onChange={(e) => onSetInput(e)}
+        onBlur={onSetValue}
       />
       <label htmlFor="max">MAX</label>
       <input
-        type="text"
+        type="number"
         id="max"
         value={input.max}
         onChange={(e) => onSetInput(e)}
+        onBlur={onSetValue}
       />
       <Range
         min={12000}
         max={1000000}
         allowCross={false}
+        value={state.value}
+        // defaultValue={[state.value[0], state.value[1]]}
         defaultValue={[12000, 1000000]}
         onChange={onChange}
-        tipFormatter={(value) => ''}
+        // tipFormatter={(value) => ''}
         tipProps={{ visible: false }}
         style={{
           width: '500px',
           margin: '5rem',
         }}
-        handle={<Handle />}
-        // handleStyle={{
-        //   width: '20px',
-        //   height: '20px',
-        //   background: 'green',
-        //   position: 'absolute',
-        //   top: '-9px',
-        //   borderRadius: '50%',
-        //   path: 'M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z',
-        // }}
       />
     </div>
   );
