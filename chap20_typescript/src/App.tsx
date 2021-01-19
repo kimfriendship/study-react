@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { SampleProvider } from './ContextSample';
 import Counter from './Counter';
 import Greetings from './Greetings';
 import MyForm from './MyForm';
@@ -16,13 +17,15 @@ function App() {
 
   return (
     <>
-      <Greetings name="Woojung" onClick={onClick} />
-      <hr />
-      <Counter />
-      <hr />
-      <MyForm onSubmit={onSubmit} />
-      <hr />
-      <ReducerSample />
+      <SampleProvider>
+        <Greetings name="Woojung" onClick={onClick} />
+        <hr />
+        <Counter />
+        <hr />
+        <MyForm onSubmit={onSubmit} />
+        <hr />
+        <ReducerSample />
+      </SampleProvider>
     </>
   );
 }
