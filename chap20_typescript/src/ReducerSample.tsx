@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useDispatch } from './ContextSample';
+import { useState, useDispatch } from './practice/ContextSample';
 
 function ReducerSample() {
   const state = useState();
